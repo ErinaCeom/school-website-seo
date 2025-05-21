@@ -1,4 +1,5 @@
-entrypoint = "index.js"
+run = "npm run dev"
+entrypoint = "README.md"
 modules = ["nodejs-22"]
 hidden = [".config", "package-lock.json"]
 
@@ -7,8 +8,13 @@ requiredFiles = [".replit", "replit.nix", "package.json", "package-lock.json"]
 
 [nix]
 channel = "stable-24_11"
+packages = ["expect"]
 
 [deployment]
-run = ["node", "index.js"]
+run = ["next", "start"]
 deploymentTarget = "autoscale"
 ignorePorts = false
+
+[[ports]]
+localPort = 3000
+externalPort = 80
