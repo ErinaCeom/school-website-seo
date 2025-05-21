@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${forum.className}  ${josefin.className}`}>
+      <body className={`${forum.className}  ${josefin.className} dark`}>
         <ThemeRegistry>{children}</ThemeRegistry>
       </body>
     </html>

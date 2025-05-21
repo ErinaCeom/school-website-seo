@@ -1,5 +1,5 @@
 import { Box, Container, Button} from "@mui/material";
-import { ProductCard, NavDrawer } from "../components";
+import NavDrawer from "@/components/NavDrawer";
 
 export default function Home() {
   return (

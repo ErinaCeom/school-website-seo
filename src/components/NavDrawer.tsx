@@ -83,7 +83,7 @@ const NavDrawer: React.FC = () => {
   return (
     <>
       {/* AppBar with Menu Button */}
-      <AppBar position="static">
+      <AppBar position="static" sx={{ background: "black" }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             spsc
