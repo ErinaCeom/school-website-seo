@@ -19,6 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import NavSectionDetails from "@/components/NavSectionDetails";
 import NavAboutDetails from "@/components/NavAboutDetails";
+import NavFacilitiesDetails from "@/components/NavFacilitiesDetails";
 
 const NavAccordion = styled((props: React.ComponentProps<typeof Accordion>) => (
   <Accordion disableGutters {...props} />
@@ -160,7 +161,7 @@ const NavDrawer: React.FC = () => {
               >
                 About
               </NavAccordionSummary>
-              <AccordionDetails >
+              <AccordionDetails>
                 <NavAboutDetails />
               </AccordionDetails>
             </NavAccordion>
@@ -210,9 +211,7 @@ const NavDrawer: React.FC = () => {
                 Facilities
               </NavAccordionSummary>
               <AccordionDetails>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
+                <NavFacilitiesDetails />
               </AccordionDetails>
             </NavAccordion>
 
