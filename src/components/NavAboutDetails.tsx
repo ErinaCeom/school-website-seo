@@ -10,14 +10,14 @@ import {
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const sectionItems = [
-  "Pre-Primary",
-  "Primary",
-  "Highschool",
-  "College",
-  "Charity",
+  "About SPSC",
+  "History of SPSC",
+  "Message from principal",
+  "Alumni",
+  "Charity section",
 ];
 
-export default function NavSectionDetails() {
+export default function NavAboutDetails() {
   return (
     <List disablePadding>
       {sectionItems.map((label, index) => (
