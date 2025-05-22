@@ -13,16 +13,11 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  ListItemIcon,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import NavSectionDetails from "@/components/NavSectionDetails";
 
 const NavAccordion = styled((props: React.ComponentProps<typeof Accordion>) => (
   <Accordion disableGutters {...props} />
@@ -59,14 +54,6 @@ const NavAccordionSummary = styled(AccordionSummary)(({}) => ({
   },
 }));
 
-const sectionItems = [
-  "Pre-Primary",
-  "Primary",
-  "Highschool",
-  "College",
-  "Charity",
-];
-
 const NavDrawer: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const [expanded, setExpanded] = React.useState<string | false>(false);
@@ -85,9 +72,16 @@ const NavDrawer: React.FC = () => {
       {/* AppBar with Menu Button */}
       <AppBar position="static" sx={{ background: "black" }}>
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            spsc
-          </Typography>
+          <Stack direction="row" spacing={1} alignItems="center" flexGrow="1">
+            <Image src="/logo.png" alt="Logo" width={40} height={40} />
+            <Typography
+              variant="heading"
+              className="font-heading"
+              sx={{ fontWeight: 400 }}
+            >
+              SPSC
+            </Typography>
+          </Stack>
           <IconButton
             edge="start"
             color="inherit"
@@ -180,12 +174,10 @@ const NavDrawer: React.FC = () => {
                 aria-controls="panel2-content"
                 id="panel2-header"
               >
-                Notice
+                Sections
               </NavAccordionSummary>
               <AccordionDetails>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
+                <NavSectionDetails />
               </AccordionDetails>
             </NavAccordion>
 
@@ -198,7 +190,7 @@ const NavDrawer: React.FC = () => {
                 aria-controls="panel3-content"
                 id="panel3-header"
               >
-                Events
+                Faculty
               </NavAccordionSummary>
               <AccordionDetails>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -216,7 +208,7 @@ const NavDrawer: React.FC = () => {
                 aria-controls="panel3-content"
                 id="panel3-header"
               >
-                Campus
+                Facilities
               </NavAccordionSummary>
               <AccordionDetails>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -234,60 +226,12 @@ const NavDrawer: React.FC = () => {
                 aria-controls="panel3-content"
                 id="panel3-header"
               >
-                Contact
+                Notices
               </NavAccordionSummary>
               <AccordionDetails>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
                 eget.
-              </AccordionDetails>
-            </NavAccordion>
-
-            <NavAccordion
-              expanded={expanded === "panel6"}
-              onChange={handleChange("panel6")}
-              disableGutters
-            >
-              <NavAccordionSummary
-                aria-controls="panel3-content"
-                id="panel3-header"
-              >
-                Sections
-              </NavAccordionSummary>
-              <AccordionDetails>
-                <List disablePadding>
-                  {sectionItems.map((label, index) => (
-                    <ListItem key={index} disablePadding>
-                      <ListItemButton
-                        disableRipple
-                        component="a"
-                        href={`/${label.toLowerCase().replace(/\s+/g, "-")}`}
-                        sx={{
-                          px: 1.5,
-                          py: 1,
-                          color: "white",
-                          "&:hover .MuiListItemIcon-root": {
-                            color: "white",
-                          },
-                        }}
-                      >
-                        <ListItemText
-                          primary={label}
-                          primaryTypographyProps={{ fontSize: "1rem" }}
-                        />
-                        <ListItemIcon
-                          sx={{
-                            minWidth: "unset",
-                            color: "gray",
-                            transition: "color 0.3s ease",
-                          }}
-                        >
-                          <ArrowForwardIosIcon fontSize="small" />
-                        </ListItemIcon>
-                      </ListItemButton>
-                    </ListItem>
-                  ))}
-                </List>
               </AccordionDetails>
             </NavAccordion>
           </Stack>
@@ -319,24 +263,26 @@ const NavDrawer: React.FC = () => {
           >
             Quick Links
           </Typography>
-          {["Notice", "Events", "Contacts", "Campus"].map((item, index) => (
-            <Typography
-              key={index}
-              sx={{
-                whiteSpace: "nowrap",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: "1.2rem",
-                pt: 1,
-                pb: 1,
-                cursor: "pointer",
-                transition: "color 0.3s ease",
-                "&:hover": { color: "gray" },
-              }}
-            >
-              {item}
-            </Typography>
-          ))}
+          {["Events", "Alumni", "Admission", "Contact", "Address"].map(
+            (item, index) => (
+              <Typography
+                key={index}
+                sx={{
+                  whiteSpace: "nowrap",
+                  color: "white",
+                  fontWeight: "bold",
+                  fontSize: "1.2rem",
+                  pt: 1,
+                  pb: 1,
+                  cursor: "pointer",
+                  transition: "color 0.3s ease",
+                  "&:hover": { color: "gray" },
+                }}
+              >
+                {item}
+              </Typography>
+            ),
+          )}
         </Box>
       </Drawer>
     </>
