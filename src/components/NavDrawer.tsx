@@ -77,6 +77,23 @@ const NavDrawer: React.FC = () => {
     setOpen(state);
   };
 
+  const renderDetails = () => {
+    switch (expanded) {
+      case "panel1":
+        return <NavAboutDetails />;
+      case "panel2":
+        return <NavSectionDetails />;
+      case "panel3":
+        return <NavStaffDetails />;
+      case "panel4":
+        return <NavFacilitiesDetails />;
+      case "panel5":
+        return <NavNoticeDetails />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       {/* AppBar with Menu Button */}
@@ -158,81 +175,34 @@ const NavDrawer: React.FC = () => {
             overflow: "scroll",
           }}
         >
-          <Stack spacing={0} pb={5}>
-            <NavAccordion
-              expanded={expanded === "panel1"}
-              onChange={handleChange("panel1")}
-            >
-              <NavAccordionSummary
-                aria-controls="panel1-content"
-                id="panel1-header"
-              >
-                About
-              </NavAccordionSummary>
-              <AccordionDetails>
-                <NavAboutDetails />
-              </AccordionDetails>
-            </NavAccordion>
-
-            <NavAccordion
-              expanded={expanded === "panel2"}
-              onChange={handleChange("panel2")}
-            >
-              <NavAccordionSummary
-                aria-controls="panel2-content"
-                id="panel2-header"
-              >
-                Sections
-              </NavAccordionSummary>
-              <AccordionDetails>
-                <NavSectionDetails />
-              </AccordionDetails>
-            </NavAccordion>
-
-            <NavAccordion
-              expanded={expanded === "panel3"}
-              onChange={handleChange("panel3")}
-            >
-              <NavAccordionSummary
-                aria-controls="panel3-content"
-                id="panel3-header"
-              >
-                Staff directory
-              </NavAccordionSummary>
-              <AccordionDetails>
-                <NavStaffDetails />
-              </AccordionDetails>
-            </NavAccordion>
-
-            <NavAccordion
-              expanded={expanded === "panel4"}
-              onChange={handleChange("panel4")}
-            >
-              <NavAccordionSummary
-                aria-controls="panel3-content"
-                id="panel3-header"
-              >
-                Facilities
-              </NavAccordionSummary>
-              <AccordionDetails>
-                <NavFacilitiesDetails />
-              </AccordionDetails>
-            </NavAccordion>
-
-            <NavAccordion
-              expanded={expanded === "panel5"}
-              onChange={handleChange("panel5")}
-            >
-              <NavAccordionSummary
-                aria-controls="panel3-content"
-                id="panel3-header"
-              >
-                Notices
-              </NavAccordionSummary>
-              <AccordionDetails>
-                <NavNoticeDetails />
-              </AccordionDetails>
-            </NavAccordion>
+          <Stack
+            direction={isSmallScreen ? "column" : "row"}
+            spacing={2}
+            sx={{ height: "100%" }}
+          >
+            <Stack spacing={0} sx={{ width: isSmallScreen ? "100%" : "30%" }}>
+              {[
+                { id: "panel1", label: "About" },
+                { id: "panel2", label: "Sections" },
+                { id: "panel3", label: "Staff directory" },
+                { id: "panel4", label: "Facilities" },
+                { id: "panel5", label: "Notices" },
+              ].map((item) => (
+                <NavAccordion
+                  key={item.id}
+                  expanded={expanded === item.id}
+                  onChange={handleChange(item.id)}
+                >
+                  <NavAccordionSummary>{item.label}</NavAccordionSummary>
+                  {isSmallScreen && (
+                    <AccordionDetails>{renderDetails()}</AccordionDetails>
+                  )}
+                </NavAccordion>
+              ))}
+            </Stack>
+            {!isSmallScreen && (
+              <Box sx={{ width: "70%", px: 3 }}>{renderDetails()}</Box>
+            )}
           </Stack>
         </Box>
 
