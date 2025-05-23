@@ -13,13 +13,19 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+
 import NavSectionDetails from "@/components/NavSectionDetails";
 import NavAboutDetails from "@/components/NavAboutDetails";
 import NavFacilitiesDetails from "@/components/NavFacilitiesDetails";
+import NavStaffDetails from "@/components/NavStaffs";
+
+import NavNoticeDetails from "@/components/NavNotice";
 
 const NavAccordion = styled((props: React.ComponentProps<typeof Accordion>) => (
   <Accordion disableGutters {...props} />
@@ -59,6 +65,8 @@ const NavAccordionSummary = styled(AccordionSummary)(({}) => ({
 const NavDrawer: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const [expanded, setExpanded] = React.useState<string | false>(false);
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleChange =
     (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -184,25 +192,21 @@ const NavDrawer: React.FC = () => {
             <NavAccordion
               expanded={expanded === "panel3"}
               onChange={handleChange("panel3")}
-              disableGutters
             >
               <NavAccordionSummary
                 aria-controls="panel3-content"
                 id="panel3-header"
               >
-                Faculty
+                Staff directory
               </NavAccordionSummary>
               <AccordionDetails>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
+                <NavStaffDetails />
               </AccordionDetails>
             </NavAccordion>
 
             <NavAccordion
               expanded={expanded === "panel4"}
               onChange={handleChange("panel4")}
-              disableGutters
             >
               <NavAccordionSummary
                 aria-controls="panel3-content"
@@ -218,7 +222,6 @@ const NavDrawer: React.FC = () => {
             <NavAccordion
               expanded={expanded === "panel5"}
               onChange={handleChange("panel5")}
-              disableGutters
             >
               <NavAccordionSummary
                 aria-controls="panel3-content"
@@ -227,9 +230,7 @@ const NavDrawer: React.FC = () => {
                 Notices
               </NavAccordionSummary>
               <AccordionDetails>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
+                <NavNoticeDetails />
               </AccordionDetails>
             </NavAccordion>
           </Stack>
@@ -241,7 +242,7 @@ const NavDrawer: React.FC = () => {
             position: "absolute",
             bottom: 0,
             width: "100%",
-            borderTop: "1px solid white",
+            borderTop: "1px solid #474747",
             px: 2,
             py: 1,
             bgcolor: "#121212",
@@ -252,7 +253,7 @@ const NavDrawer: React.FC = () => {
         >
           <Typography
             sx={{
-              color: "gray",
+              color: "#474747",
               whiteSpace: "nowrap",
               p: 1,
               pl: 1,
