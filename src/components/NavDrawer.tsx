@@ -19,12 +19,13 @@ import {
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-
-import NavSectionDetails from "@/components/NavSectionDetails";
-import NavAboutDetails from "@/components/NavAboutDetails";
-import NavFacilitiesDetails from "@/components/NavFacilitiesDetails";
-import NavStaffDetails from "@/components/NavStaffs";
-import NavNoticeDetails from "@/components/NavNotice";
+import {
+  NavSectionDetails,
+  NavAboutDetails,
+  NavFacilitiesDetails,
+  NavStaffDetails,
+  NavNoticeDetails,
+} from "@/components/navbar/";
 
 const NavAccordion = styled((props: React.ComponentProps<typeof Accordion>) => (
   <Accordion disableGutters {...props} />
@@ -65,6 +66,9 @@ const NavAccordionSummary = styled(
     textUnderlineOffset: "5px",
     minHeight: 0,
   },
+  "&:hover": {
+    color: "white",
+  },
   "& .MuiAccordionSummary-content": {
     margin: 0,
   },
@@ -74,15 +78,25 @@ const NavAccordionSummary = styled(
   },
 }));
 
+interface NavDrawerProps {
+  logoSrc?: string;
+  titleName?: string;
+  quickLinks?: string[];
+}
+
 const navItems = [
   { id: "panel1", label: "About", content: <NavAboutDetails /> },
   { id: "panel2", label: "Sections", content: <NavSectionDetails /> },
   { id: "panel3", label: "Staff directory", content: <NavStaffDetails /> },
   { id: "panel4", label: "Facilities", content: <NavFacilitiesDetails /> },
   { id: "panel5", label: "Notices", content: <NavNoticeDetails /> },
-];
+]
 
-const NavDrawer: React.FC = () => {
+const NavDrawer: React.FC<NavDrawerProps> = ({
+  logoSrc = "/logo.png",
+  titleName = "SPSC",
+  quickLinks = ["Events", "Alumni", "Admission", "Contact", "Address"],
+}) => {
   const [open, setOpen] = React.useState(false);
   const [expanded, setExpanded] = React.useState<string | false>(false);
   const theme = useTheme();
@@ -103,13 +117,13 @@ const NavDrawer: React.FC = () => {
       <AppBar position="static" sx={{ background: "black" }}>
         <Toolbar>
           <Stack direction="row" spacing={1} alignItems="center" flexGrow={1}>
-            <Image src="/logo.png" alt="Logo" width={40} height={40} />
+            <Image src={logoSrc} alt="Logo" width={40} height={40} />
             <Typography
               variant="heading"
               className="font-heading"
               sx={{ fontWeight: 400 }}
             >
-              SPSC
+              {titleName}
             </Typography>
           </Stack>
           <IconButton
@@ -145,13 +159,13 @@ const NavDrawer: React.FC = () => {
           sx={{ p: 2, width: "100%" }}
         >
           <Stack direction="row" spacing={1} alignItems="center">
-            <Image src="/logo.png" alt="Logo" width={40} height={40} />
+            <Image src={logoSrc} alt="Logo" width={40} height={40} />
             <Typography
               variant="heading"
               className="font-heading"
               sx={{ fontWeight: 400 }}
             >
-              SPSC
+              {titleName}
             </Typography>
           </Stack>
           <IconButton
@@ -233,7 +247,7 @@ const NavDrawer: React.FC = () => {
           >
             Quick Links
           </Typography>
-          {["Events", "Alumni", "Admission", "Contact", "Address"].map(
+          {quickLinks.map(
             (item) => (
               <Typography
                 key={item}
