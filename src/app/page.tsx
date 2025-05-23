@@ -5,13 +5,13 @@ export default function Home() {
   return (
     <>
       <NavDrawer titleName="SPSC" logoSrc="/logo.png"/>
-      <Box>
-        <Container>
+      <Container>
+        <Box p={3}>
           <Typography variant="h3" color="white">
-            St.Philip's High School and College
+            Home
           </Typography>
-        </Container>
-      </Box>
+        </Box>
+      </Container>
     </>
   );
 }

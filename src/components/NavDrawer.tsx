@@ -84,13 +84,19 @@ interface NavDrawerProps {
   quickLinks?: string[];
 }
 
-const navItems = [
+type NavItem = {
+  id: string;
+  label: string;
+  content: React.ReactNode;
+};
+
+const navItems: NavItem[] = [
   { id: "panel1", label: "About", content: <NavAboutDetails /> },
   { id: "panel2", label: "Sections", content: <NavSectionDetails /> },
   { id: "panel3", label: "Staff directory", content: <NavStaffDetails /> },
   { id: "panel4", label: "Facilities", content: <NavFacilitiesDetails /> },
   { id: "panel5", label: "Notices", content: <NavNoticeDetails /> },
-]
+];
 
 const NavDrawer: React.FC<NavDrawerProps> = ({
   logoSrc = "/logo.png",
@@ -247,25 +253,23 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
           >
             Quick Links
           </Typography>
-          {quickLinks.map(
-            (item) => (
-              <Typography
-                key={item}
-                sx={{
-                  whiteSpace: "nowrap",
-                  color: "white",
-                  fontWeight: "bold",
-                  fontSize: "1.2rem",
-                  py: 1,
-                  cursor: "pointer",
-                  transition: "color 0.3s ease",
-                  "&:hover": { color: "gray" },
-                }}
-              >
-                {item}
-              </Typography>
-            ),
-          )}
+          {quickLinks.map((item) => (
+            <Typography
+              key={item}
+              sx={{
+                whiteSpace: "nowrap",
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "1.2rem",
+                py: 1,
+                cursor: "pointer",
+                transition: "color 0.3s ease",
+                "&:hover": { color: "gray" },
+              }}
+            >
+              {item}
+            </Typography>
+          ))}
         </Box>
       </Drawer>
     </>
