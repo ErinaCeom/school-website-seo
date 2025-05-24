@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
-import NavDrawer from "@/components/NavDrawer";
+import { NavDrawer } from "@/components/";
 
 export default function Home() {
   return (

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   AppBar,
   Toolbar,
@@ -19,19 +20,14 @@ import {
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import {
-  NavSectionDetails,
-  NavAboutDetails,
-  NavFacilitiesDetails,
-  NavStaffDetails,
-  NavNoticeDetails,
-} from "@/components/navbar/";
+import NavDetails from "./NavDetails";
 
+// Styled MUI Accordion with custom dark theme and no box shadow
 const NavAccordion = styled((props: React.ComponentProps<typeof Accordion>) => (
   <Accordion disableGutters {...props} />
 ))(() => ({
-  backgroundColor: "#121212",
   color: "white",
+  backgroundColor: "#121212",
   boxShadow: "none",
   border: "none",
   "&.Mui-expanded": {
@@ -39,24 +35,27 @@ const NavAccordion = styled((props: React.ComponentProps<typeof Accordion>) => (
   },
 }));
 
+// Styled AccordionSummary with responsive typography and active-state styles
 const NavAccordionSummary = styled(
   ({
     isActive,
     isAnyExpanded,
+    isSmallScreen,
     ...props
   }: {
     isActive: boolean;
     isAnyExpanded: boolean;
+    isSmallScreen: boolean;
   } & React.ComponentProps<typeof AccordionSummary>) => (
     <AccordionSummary {...props} />
   ),
-)(({ isActive, isAnyExpanded }) => ({
+)(({ isActive, isAnyExpanded, isSmallScreen }) => ({
   paddingTop: 0,
   paddingBottom: 0,
   margin: 0,
   minHeight: 0,
   fontFamily: "Forum, serif",
-  fontSize: "2.5rem",
+  fontSize: isSmallScreen ? "2.5rem" : "4rem",
   fontWeight: 400,
   color: !isAnyExpanded || isActive ? "white" : "gray",
   transition: "color 0.3s ease",
@@ -78,48 +77,102 @@ const NavAccordionSummary = styled(
   },
 }));
 
+// Props for NavDrawer component
 interface NavDrawerProps {
   logoSrc?: string;
   titleName?: string;
   quickLinks?: string[];
 }
 
+// Centralized nav data object
+const navDetailsItems = {
+  about: [
+    "About SPSC",
+    "History of SPSC",
+    "Message from principal",
+    "Alumni",
+    "Charity section",
+  ],
+  sections: ["Pre-Primary", "Primary", "Highschool", "College", "Charity"],
+  staffs: ["Administration", "Academics", "Office Staff"],
+  facilities: [
+    "Language club",
+    "Debate club",
+    "Ecology club",
+    "Sports club",
+    "Scouts",
+  ],
+  notices: ["Recent notices", "All notices"],
+};
+
+// NavItem type for the navItems array
 type NavItem = {
   id: string;
   label: string;
   content: React.ReactNode;
 };
 
+// List of navigable sections, each with pre-rendered NavDetails component
 const navItems: NavItem[] = [
-  { id: "panel1", label: "About", content: <NavAboutDetails /> },
-  { id: "panel2", label: "Sections", content: <NavSectionDetails /> },
-  { id: "panel3", label: "Staff directory", content: <NavStaffDetails /> },
-  { id: "panel4", label: "Facilities", content: <NavFacilitiesDetails /> },
-  { id: "panel5", label: "Notices", content: <NavNoticeDetails /> },
+  {
+    id: "panel1",
+    label: "About",
+    content: <NavDetails items={navDetailsItems.about} />,
+  },
+  {
+    id: "panel2",
+    label: "Sections",
+    content: <NavDetails items={navDetailsItems.sections} />,
+  },
+  {
+    id: "panel3",
+    label: "Staff directory",
+    content: <NavDetails items={navDetailsItems.staffs} />,
+  },
+  {
+    id: "panel4",
+    label: "Facilities",
+    content: <NavDetails items={navDetailsItems.facilities} />,
+  },
+  {
+    id: "panel5",
+    label: "Notices",
+    content: <NavDetails items={navDetailsItems.notices} />,
+  },
 ];
 
+// Framer Motion animation variants for staggered fade-in
+const fadeVariants = {
+  hidden: { opacity: 0, y: -10 },
+  visible: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -10 },
+};
+
+// Main navigation drawer component
 const NavDrawer: React.FC<NavDrawerProps> = ({
   logoSrc = "/logo.png",
   titleName = "SPSC",
   quickLinks = ["Events", "Alumni", "Admission", "Contact", "Address"],
 }) => {
-  const [open, setOpen] = React.useState(false);
-  const [expanded, setExpanded] = React.useState<string | false>(false);
+  const [open, setOpen] = React.useState(false); // Drawer open/close state
+  const [expanded, setExpanded] = React.useState<string | false>(false); // Tracks currently expanded panel
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
+  // Toggles which accordion panel is expanded
   const handleChange =
     (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
 
+  // Opens or closes the drawer
   const toggleDrawer = (state: boolean) => () => {
     setOpen(state);
   };
 
   return (
     <>
-      {/* AppBar with Menu Button */}
+      {/* Top AppBar with Logo and Menu Icon */}
       <AppBar position="static" sx={{ background: "black" }}>
         <Toolbar>
           <Stack direction="row" spacing={1} alignItems="center" flexGrow={1}>
@@ -143,7 +196,7 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
         </Toolbar>
       </AppBar>
 
-      {/* Fullscreen Top Drawer */}
+      {/* Fullscreen Navigation Drawer */}
       <Drawer
         anchor="top"
         open={open}
@@ -157,19 +210,19 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
           },
         }}
       >
-        {/* Drawer Header */}
+        {/* Drawer Header with Logo and Close Button */}
         <Stack
           direction="row"
           alignItems="center"
           justifyContent="space-between"
-          sx={{ p: 2, width: "100%" }}
+          sx={{ p: 3, width: "100%" }}
         >
           <Stack direction="row" spacing={1} alignItems="center">
-            <Image src={logoSrc} alt="Logo" width={40} height={40} />
+            <Image src={logoSrc} alt="Logo" width={50} height={50} />
             <Typography
               variant="heading"
               className="font-heading"
-              sx={{ fontWeight: 400 }}
+              sx={{ fontSize: "2rem" }}
             >
               {titleName}
             </Typography>
@@ -188,7 +241,7 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
           </IconButton>
         </Stack>
 
-        {/* Navigation Links */}
+        {/* Navigation Area: Accordions (Left) + Details Panel (Right on desktop) */}
         <Box
           sx={{ p: 2, position: "relative", height: "100%", overflow: "auto" }}
         >
@@ -197,38 +250,65 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
             spacing={2}
             sx={{ height: "100%" }}
           >
+            {/* Accordion List */}
             <Stack
               spacing={0}
               pb={10}
               sx={{ width: isSmallScreen ? "100%" : "30%" }}
             >
-              {navItems.map(({ id, label, content }) => (
+              {navItems.map(({ id, label, content }, i) => (
                 <NavAccordion
                   key={id}
                   expanded={expanded === id}
                   onChange={handleChange(id)}
                 >
-                  <NavAccordionSummary
-                    isActive={expanded === id}
-                    isAnyExpanded={Boolean(expanded)}
+                  {/* Accordion Title with animation */}
+                  <motion.div
+                    variants={fadeVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    transition={{ delay: i * 0.1, duration: 0.3 }}
                   >
-                    {label}
-                  </NavAccordionSummary>
+                    <NavAccordionSummary
+                      isActive={expanded === id}
+                      isAnyExpanded={Boolean(expanded)}
+                      isSmallScreen={isSmallScreen}
+                    >
+                      {label}
+                    </NavAccordionSummary>
+                  </motion.div>
+
+                  {/* On mobile: show accordion content below title */}
                   {isSmallScreen && expanded === id && (
                     <AccordionDetails>{content}</AccordionDetails>
                   )}
                 </NavAccordion>
               ))}
             </Stack>
+
+            {/* On desktop: show accordion content on the right side */}
             {!isSmallScreen && (
-              <Box sx={{ width: "70%", px: 3 }}>
-                {navItems.find((item) => item.id === expanded)?.content || null}
+              <Box sx={{ width: "70%", px: 3, fontSize: "20px" }}>
+                <AnimatePresence mode="wait">
+                  {expanded && (
+                    <motion.div
+                      key={expanded}
+                      initial="hidden"
+                      animate="visible"
+                      exit="hidden"
+                    >
+                      {navItems.find((item) => item.id === expanded)?.content ||
+                        null}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </Box>
             )}
           </Stack>
         </Box>
 
-        {/* Quick Links */}
+        {/* Footer Quick Links section */}
         <Box
           sx={{
             position: "absolute",
