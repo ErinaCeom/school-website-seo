@@ -60,7 +60,7 @@ export default function NavDetails({ items }: AnimatedNavListProps) {
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
               <ListItemText
                 primary={label}
-                primaryTypographyProps={{ fontSize: "1rem" }}
+                primaryTypographyProps={{ fontSize: "inherit" }}
               />
               <ListItemIcon
                 sx={{

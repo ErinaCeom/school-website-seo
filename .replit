@@ -1,4 +1,4 @@
-run = "npm run dev"
+run = "next start"
 entrypoint = "README.md"
 modules = ["nodejs-22"]
 hidden = [".config", "package-lock.json"]
@@ -18,3 +18,7 @@ ignorePorts = false
 [[ports]]
 localPort = 3000
 externalPort = 80
+
+[[ports]]
+localPort = 3001
+externalPort = 3000

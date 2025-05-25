@@ -281,7 +281,9 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
 
                   {/* On mobile: show accordion content below title */}
                   {isSmallScreen && expanded === id && (
-                    <AccordionDetails>{content}</AccordionDetails>
+                    <AccordionDetails sx={{ fontSize: "1rem" }}>
+                      {content}
+                    </AccordionDetails>
                   )}
                 </NavAccordion>
               ))}
@@ -289,7 +291,7 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
 
             {/* On desktop: show accordion content on the right side */}
             {!isSmallScreen && (
-              <Box sx={{ width: "70%", px: 3, fontSize: "20px" }}>
+              <Box sx={{ width: "70%", px: 3, fontSize: "1.5rem" }}>
                 <AnimatePresence mode="wait">
                   {expanded && (
                     <motion.div
