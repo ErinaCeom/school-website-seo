@@ -1,4 +1,4 @@
-run = "next start"
+run = "npm run dev"
 entrypoint = "README.md"
 modules = ["nodejs-22"]
 hidden = [".config", "package-lock.json"]

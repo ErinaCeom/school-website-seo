@@ -241,7 +241,7 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
           </IconButton>
         </Stack>
 
-        {/* Navigation Area: Accordions (Left) + Details Panel (Right on desktop) */}
+        {/* Navigation Area: Accordions (Left) + Details Panel */}
         <Box
           sx={{ p: 2, position: "relative", height: "100%", overflow: "auto" }}
         >
@@ -291,7 +291,7 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
 
             {/* On desktop: show accordion content on the right side */}
             {!isSmallScreen && (
-              <Box sx={{ width: "70%", px: 3, fontSize: "1.5rem" }}>
+              <Box sx={{ width: "70%", px: 1, fontSize: "1.5rem" }}>
                 <AnimatePresence mode="wait">
                   {expanded && (
                     <motion.div

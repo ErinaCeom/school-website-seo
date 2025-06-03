@@ -36,6 +36,7 @@ export default function NavDetails({ items }: AnimatedNavListProps) {
       initial="hidden"
       animate="visible"
       disablePadding
+      sx={{ mt: 2, }}
     >
       {items.map((label, index) => (
         <ListItem
