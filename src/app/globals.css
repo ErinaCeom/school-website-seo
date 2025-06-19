@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #121212;
+  --foreground: #000000;
   --font-heading: var(--font-forum);
   --font-body: var(--font-josefin);
 }
@@ -14,13 +14,13 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #000000;
     --foreground: #ededed;
   }
 }
 
 .dark{
-  background: #121212;
+  background: #000000;
 }
 
 .font-heading {

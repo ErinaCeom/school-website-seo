@@ -16,6 +16,7 @@ import {
   AccordionSummary,
   useMediaQuery,
   useTheme,
+  useScrollTrigger,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -36,6 +37,7 @@ const NavAccordion = styled((props: React.ComponentProps<typeof Accordion>) => (
 }));
 
 // Styled AccordionSummary with responsive typography and active-state styles
+// the items in the navbar
 const NavAccordionSummary = styled(
   ({
     isActive,
@@ -64,6 +66,11 @@ const NavAccordionSummary = styled(
     textDecorationThickness: "1px",
     textUnderlineOffset: "5px",
     minHeight: 0,
+  },
+  "&:active": {
+    textDecoration: "underline",
+    textDecorationThickness: "1px",
+    textUnderlineOffset: "5px",
   },
   "&:hover": {
     color: "white",
@@ -158,6 +165,10 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
   const [expanded, setExpanded] = React.useState<string | false>(false); // Tracks currently expanded panel
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const scrolledEnough = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 400,
+  });
 
   // Toggles which accordion panel is expanded
   const handleChange =
@@ -173,14 +184,30 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
   return (
     <>
       {/* Top AppBar with Logo and Menu Icon */}
-      <AppBar position="static" sx={{ background: "black" }}>
+      <AppBar
+        elevation={0}
+        position="fixed"
+        sx={{
+          background: scrolledEnough ? "black" : "transparent",
+          p: { sm: 0, md: 1, lg: 1 },
+          transition: "background 0.4s ease-in",
+        }}
+      >
         <Toolbar>
           <Stack direction="row" spacing={1} alignItems="center" flexGrow={1}>
-            <Image src={logoSrc} alt="Logo" width={40} height={40} />
+            <Image
+              src={logoSrc}
+              alt="Logo"
+              width={isSmallScreen ? 40 : 60}
+              height={isSmallScreen ? 40 : 60}
+            />
             <Typography
               variant="heading"
               className="font-heading"
-              sx={{ fontWeight: 400 }}
+              sx={{
+                fontSize: { sm: "normal", md: "2rem", lg: "2rem" },
+                fontWeight: 400,
+              }}
             >
               {titleName}
             </Typography>
@@ -191,7 +218,7 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
             aria-label="menu"
             onClick={toggleDrawer(true)}
           >
-            <MenuIcon />
+            <MenuIcon fontSize={isSmallScreen ? "medium" : "large"} />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -218,11 +245,16 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
           sx={{ p: 3, width: "100%" }}
         >
           <Stack direction="row" spacing={1} alignItems="center">
-            <Image src={logoSrc} alt="Logo" width={50} height={50} />
+            <Image
+              src={logoSrc}
+              alt="Logo"
+              width={isSmallScreen ? 40 : 50}
+              height={isSmallScreen ? 40 : 50}
+            />
             <Typography
               variant="heading"
               className="font-heading"
-              sx={{ fontSize: "2rem" }}
+              sx={{ fontSize: { lg: "2rem" } }}
             >
               {titleName}
             </Typography>
@@ -235,9 +267,10 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
               borderRadius: 999,
               borderColor: "gray",
               p: 0.5,
+              mr: { xs: 0, sm: 0, md: 2, lg: 2, xl: 2 },
             }}
           >
-            <CloseIcon />
+            <CloseIcon fontSize={isSmallScreen ? "medium" : "large"} />
           </IconButton>
         </Stack>
 
