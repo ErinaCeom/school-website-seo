@@ -28,7 +28,7 @@ const NavAccordion = styled((props: React.ComponentProps<typeof Accordion>) => (
   <Accordion disableGutters {...props} />
 ))(() => ({
   color: "white",
-  backgroundColor: "#121212",
+  backgroundColor: "#000000",
   boxShadow: "none",
   border: "none",
   "&.Mui-expanded": {
@@ -232,7 +232,7 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
           sx: {
             height: "100vh",
             width: "100vw",
-            backgroundColor: "#121212",
+            backgroundColor: "#000000",
             color: "white",
           },
         }}
@@ -352,7 +352,7 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
             borderTop: "1px solid #474747",
             px: 2,
             py: 1,
-            bgcolor: "#121212",
+            bgcolor: "#000000",
             overflowX: "auto",
             display: "flex",
             gap: 4,

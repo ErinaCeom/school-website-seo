@@ -74,7 +74,7 @@ export default function Home() {
         <Stack direction="column" sx={{ gap: 1, color: "white" }} >
           <Typography variant="h1" sx={{fontFamily: "Forum, serif", fontSize: { xs: "3rem",  }
           }}>About</Typography>
-          <Typography variant="h5" sx={{fontFamily: "Forum, serif",fontSize: { xs: "1rem",  }}}>
+          <Typography sx={{fontFamily: "Forum, serif",fontSize: { xs: "1rem",  }}}>
             St. Philip’s High School and College is a renowned educational
             institution located in Dinajpur, Bangladesh. The school was founded
             in 1951. The institution has a long-standing reputation for

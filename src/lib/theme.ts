@@ -19,8 +19,16 @@ declare module "@mui/material/Typography" {
 const baseTheme = createTheme();
 
 const theme = createTheme({
+  palette: {
+    background: {
+      default: "#000000",
+    },
+    text: {
+      primary: "#ffffff",
+    },
+  },
   typography: {
-    fontFamily: "Josefin Sans, sans-serif", // default
+    fontFamily: "var(--font-josefin), sans-serif",
     heading: { ...baseTheme.typography.h5, fontFamily: "Forum, serif" },
   },
 });

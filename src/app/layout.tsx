@@ -2,6 +2,7 @@ import { Forum, Josefin_Sans } from "next/font/google";
 import type { Metadata } from "next";
 import ThemeRegistry from "../lib/themeRegistry";
 import "./globals.css";
+import Footer from "@/components/footer";
 
 const forum = Forum({
   weight: "400",
@@ -23,8 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${forum.className}  ${josefin.className} dark`}>
-        <ThemeRegistry>{children}</ThemeRegistry>
+      <body className={`${josefin.variable} ${forum.variable}`}>
+        <ThemeRegistry>
+          {children}
+          <Footer />
+        </ThemeRegistry>
       </body>
     </html>
   );
