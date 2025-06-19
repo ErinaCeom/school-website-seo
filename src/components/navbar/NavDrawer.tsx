@@ -202,10 +202,14 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
               height={isSmallScreen ? 40 : 60}
             />
             <Typography
-              variant="heading"
-              className="font-heading"
               sx={{
-                fontSize: { sm: "normal", md: "2rem", lg: "2rem" },
+                fontSize: {
+                  xs: "larger",
+                  sm: "larger",
+                  md: "2rem",
+                  lg: "2rem",
+                },
+                fontFamily: "Forum, serif",
                 fontWeight: 400,
               }}
             >
@@ -252,9 +256,8 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
               height={isSmallScreen ? 40 : 50}
             />
             <Typography
-              variant="heading"
-              className="font-heading"
-              sx={{ fontSize: { lg: "2rem" } }}
+              variant="h5"
+              sx={{ fontSize: { lg: "2rem" }, fontFamily: "Forum,serif" }}
             >
               {titleName}
             </Typography>

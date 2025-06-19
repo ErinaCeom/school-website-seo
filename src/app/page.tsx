@@ -36,7 +36,6 @@ export default function Home() {
         >
           <Typography
             variant="h1"
-            color="white"
             sx={{
               fontSize: { xs: "3rem", md: "6rem", lg: "7rem" },
               fontFamily: "Forum",
@@ -46,7 +45,7 @@ export default function Home() {
           </Typography>
           <Typography
             variant="h4"
-            color="white"
+            component="h2"
             sx={{
               fontSize: { xs: "1rem", md: "2rem", lg: "2rem" },
               fontFamily: "Forum",
@@ -70,9 +69,9 @@ export default function Home() {
           }}
         />
       </Box>
-      <Container sx={{ bgcolor: "black", my: 5 }}>
+      <Container sx={{ my: 5 }}>
         <Stack direction="column" sx={{ gap: 1, color: "white" }} >
-          <Typography variant="h1" sx={{fontFamily: "Forum, serif", fontSize: { xs: "3rem",  }
+          <Typography sx={{fontFamily: "Forum, serif", fontSize: { xs: "3rem",  }
           }}>About</Typography>
           <Typography sx={{fontFamily: "Forum, serif",fontSize: { xs: "1rem",  }}}>
             St. Philip’s High School and College is a renowned educational
