@@ -198,8 +198,8 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
             <Image
               src={logoSrc}
               alt="Logo"
-              width={40}
-              height={40}
+              width={60}
+              height={60}
               style={{
                 width: isSmallScreen ? 40 : 60,
                 height: isSmallScreen ? 40 : 60,
@@ -256,8 +256,12 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
             <Image
               src={logoSrc}
               alt="Logo"
-              width={isSmallScreen ? 40 : 50}
-              height={isSmallScreen ? 40 : 50}
+              width={50}
+              height={50}
+              style={{
+                width: isSmallScreen ? 40 : 50,
+                height: isSmallScreen ? 40 : 50,
+              }}
             />
             <Typography
               variant="h5"
