@@ -19,18 +19,6 @@
   }
 }
 
-.dark{
-  background: #000000;
-}
-
-.font-heading {
-  font-family: var(--font-heading);
-}
-
-.font-body {
-  font-family: var(--font-body);
-}
-
 html{
   scrollbar-width: thin;
   scrollbar-color: #888 #111;
