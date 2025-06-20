@@ -4,14 +4,16 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <Stack
-      direction={{ xs: "column", lg: "row", xl:"row" }}
+      direction={{ xs: "column", md: "row", lg: "row" }}
+      alignItems="center"
       gap={2}
+      py={3}
     >
-      <Box sx={{ flexGrow: 0 }}>
+      <Box sx={{ width: { xs: "100%", md: "50%", xl: "50%" } }}>
         <Stack direction="row" justifyContent="space-around">
           {/* Quick Links */}
           <Grid container>
-            <Grid size={{ xs: "auto", sm: 6, md: 6 }}>
+            <Grid size={{ xs: "auto", sm: 6, md: 12 }}>
               <Typography variant="h5" sx={{ fontFamily: "Forum", mb: 2 }}>
                 Quick links
               </Typography>
@@ -21,7 +23,7 @@ export default function Footer() {
                     {["About", "Faculty", "Notices", "Contact"].map((text) => (
                       <Link
                         key={text}
-                        href="#"
+                        href={text}
                         underline="always"
                         color="inherit"
                         sx={{ fontSize: "small", fontFamily: "Josefin Sans" }}
@@ -53,7 +55,7 @@ export default function Footer() {
           </Grid>
           {/*Useful links*/}
           <Grid container>
-            <Grid size={{ xs: "auto", sm: 6, md: 6 }}>
+            <Grid size={{ xs: "auto", sm: 6, md: 12 }}>
               <Typography variant="h5" sx={{ fontFamily: "Forum", mb: 2 }}>
                 Useful links
               </Typography>
@@ -79,7 +81,7 @@ export default function Footer() {
           </Grid>
         </Stack>
       </Box>
-      <Box sx={{ flexGrow: 0 }}>
+      <Box sx={{ flexGrow: 1 }}>
         <Stack
           direction="column"
           justifyContent="center"

@@ -88,7 +88,7 @@ export default function Home() {
             color="#ffff"
             sx={{ fontStyle: "italic",fontSize:"small" }}
           >
-            Read More >
+            Read More &gt;
           </Link>
         </Stack>
       </Container>
