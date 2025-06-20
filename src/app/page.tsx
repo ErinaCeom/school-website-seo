@@ -6,12 +6,11 @@ import {
   Link,
   Divider,
 } from "@mui/material";
-import { NavDrawer } from "@/components/";
 
 export default function Home() {
   return (
     <>
-      <NavDrawer titleName="SPSC" logoSrc="/logo.png" />
+      {/* Hero Section */}
       <Box
         display="flex"
         flexDirection="column"
@@ -69,6 +68,7 @@ export default function Home() {
           }}
         />
       </Box>
+      {/* About Section */}
       <Container sx={{ my: 5 }}>
         <Stack direction="column" sx={{ gap: 1, color: "white" }} >
           <Typography sx={{fontFamily: "Forum, serif", fontSize: { xs: "3rem",  }

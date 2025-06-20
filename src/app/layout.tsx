@@ -2,6 +2,7 @@ import { Forum, Josefin_Sans } from "next/font/google";
 import type { Metadata } from "next";
 import ThemeRegistry from "../lib/themeRegistry";
 import "./globals.css";
+import { NavDrawer } from "@/components/";
 import Footer from "@/components/footer";
 
 const forum = Forum({
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${josefin.variable} ${forum.variable}`}>
         <ThemeRegistry>
+          <NavDrawer titleName="SPSC" logoSrc="/logo.png" />
           {children}
           <Footer />
         </ThemeRegistry>
