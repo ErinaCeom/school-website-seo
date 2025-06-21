@@ -194,7 +194,14 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
         }}
       >
         <Toolbar>
-          <Stack direction="row" spacing={1} alignItems="center" flexGrow={1}>
+          <Stack
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            flexGrow={1}
+            component="a"
+            href="/"
+          >
             <Image
               src={logoSrc}
               alt="Logo"

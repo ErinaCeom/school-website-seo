@@ -1,6 +1,7 @@
 import { Box, Stack, Card, Typography, IconButton } from "@mui/material";
 import DirectionsIcon from "@mui/icons-material/Directions";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
+import Link from "next/link";
 
 export default function MapCard() {
   return (
@@ -54,9 +55,7 @@ export default function MapCard() {
           </Typography>
           <Stack direction="row" alignItems="center" spacing={1}>
             <MyLocationIcon fontSize="small" />
-            <Typography variant="subtitle2">
-              Kasba, Dinajpur
-            </Typography>
+            <Typography variant="subtitle2">Kasba, Dinajpur</Typography>
           </Stack>
         </Stack>
         {/* Share Button */}
@@ -70,6 +69,9 @@ export default function MapCard() {
           }}
         >
           <IconButton
+            component={Link}
+            href="https://maps.app.goo.gl/eNvdyqkNLMrBnFBo9?g_st=ac"
+            target="_blank"
             sx={{
               color: "black",
               backgroundColor: "white",
