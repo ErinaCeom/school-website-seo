@@ -6,6 +6,7 @@ import {
   Link,
   Divider,
 } from "@mui/material";
+import { MapCard  } from "@/components";
 
 export default function Home() {
   return (
@@ -111,6 +112,11 @@ export default function Home() {
           "discipline is not just a rule,
           <br /> it's a culture of excellence"
         </Typography>
+
+        {/* Contacts */}
+        <Stack mt={1}>
+          <MapCard />
+        </Stack>
       </Container>
     </>
   );
