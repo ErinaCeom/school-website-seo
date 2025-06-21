@@ -1,6 +1,13 @@
 import { Stack, Box, Grid, Typography, Link } from "@mui/material";
 import Image from "next/image";
 
+const links : string[] = [
+  "http://www.educationboardresults.gov.bd/",
+  "https://moedu.portal.gov.bd/",
+  "https://dinajpureducationboard.gov.bd/",
+  "https://banbeis.gov.bd/",
+];
+
 export default function Footer() {
   return (
     <Stack
@@ -39,7 +46,7 @@ export default function Footer() {
                       (text) => (
                         <Link
                           key={text}
-                          href="#"
+                          href={text}
                           underline="always"
                           color="inherit"
                           sx={{ fontSize: "small", fontFamily: "Josefin Sans" }}
@@ -65,10 +72,11 @@ export default function Footer() {
                   "Ministry of education",
                   "Dinajpur education board",
                   "Banbeis",
-                ].map((text) => (
+                ].map((text,index) => (
                   <Link
                     key={text}
-                    href="#"
+                    href={links[index]}
+                    target="_blank"
                     underline="always"
                     color="inherit"
                     sx={{ fontSize: "small", fontFamily: "Josefin Sans" }}
