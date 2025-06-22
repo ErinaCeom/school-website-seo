@@ -7,6 +7,8 @@ import {
   Divider,
 } from "@mui/material";
 import { MapCard } from "@/components";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
 
 export default function Home() {
   return (
@@ -69,9 +71,10 @@ export default function Home() {
           }}
         />
       </Box>
+
       {/* Other sections */}
       <Container sx={{ my: 5 }}>
-        {/* About Section */}
+        {/* About and Quote Section */}
         <Stack
           sx={{ flexDirection: { xs: "column", md: "row" }, gap: { md: 8 } }}
         >
@@ -128,8 +131,23 @@ export default function Home() {
         </Stack>
 
         {/* Contacts */}
-        <Stack mt={1}>
-          <MapCard />
+        <Stack spacing={2} mt={3} sx={{ flexDirection: { md: "row" } }}>
+          <Stack sx={{ flexGrow: 1 }}>
+            <Typography
+              sx={{ fontFamily: "Forum, serif", fontSize: { xs: "3rem" } }}
+            >
+              Contact
+            </Typography>
+            <Typography component="a" href="mailto:spscdnj1951@gmail.com" sx={{mt:{md:1}}}>
+              <EmailIcon fontSize="small" /> spscdnj1951@gmail.com
+            </Typography>
+            <Typography component="a" href="tel:0531-65460">
+              <PhoneIcon fontSize="small" /> 0531-65460
+            </Typography>
+          </Stack>
+          <Stack sx={{ flexGrow: 2 }}>
+            <MapCard />
+          </Stack>
         </Stack>
       </Container>
     </>
