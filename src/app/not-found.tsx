@@ -1,6 +1,23 @@
 // app/not-found.tsx
 import { Button, Typography, Container } from "@mui/material";
+import { Metadata } from 'next';
 import Link from "next/link";
+
+export const generateMetadata = (): Metadata => {
+  return {
+    title: '404 - Page Not Found',
+    description: 'Sorry, the page you’re looking for doesn’t exist.',
+    robots: {
+      index: false,
+      follow: false,
+    },
+    openGraph: {
+      title: '404 - Page Not Found',
+      description: 'The page you are trying to access does not exist.',
+      url: '/404',
+    },
+  };
+};
 
 export default function NotFound() {
   return (
@@ -21,7 +38,7 @@ export default function NotFound() {
       >
         404
       </Typography>
-      <Typography>Page not found</Typography>
+      <Typography >Page not found</Typography>
       <Button
         variant="outlined"
         component={Link}
