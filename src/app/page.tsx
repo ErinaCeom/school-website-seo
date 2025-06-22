@@ -76,16 +76,31 @@ export default function Home() {
       <Container sx={{ my: 5 }}>
         {/* About and Quote Section */}
         <Stack
-          sx={{ flexDirection: { xs: "column", md: "row" }, gap: { md: 8 } }}
+          sx={{ flexDirection: { xs: "column", md: "row" }, gap: { md: 0 } }}
         >
-          <Stack direction="column" sx={{ gap: 1, color: "white" }}>
+          {/*About*/}
+          <Stack
+            direction="column"
+            sx={{
+              width: { md: "50%" },
+              pr: 3,
+              gap: 1,
+              color: "white",
+            }}
+          >
             <Typography
-              sx={{ fontFamily: "Forum, serif", fontSize: { xs: "3rem" } }}
+              sx={{
+                fontFamily: "Forum, serif",
+                fontSize: { xs: "3rem", md: "4rem" },
+              }}
             >
               About
             </Typography>
             <Typography
-              sx={{ fontFamily: "Forum, serif", fontSize: { xs: "1rem" } }}
+              sx={{
+                fontFamily: "Forum, serif",
+                fontSize: { xs: "1rem", md: "1.2rem" },
+              }}
             >
               St. Philip’s High School and College is a renowned educational
               institution located in Dinajpur, Bangladesh. The school was
@@ -99,29 +114,23 @@ export default function Home() {
               href="/about"
               underline="always"
               color="#ffff"
-              sx={{ fontStyle: "italic", fontSize: "small" }}
+              sx={{ fontStyle: "italic", fontSize: { xs: "1rem", md: "1rem" } }}
             >
               Read More &gt;
             </Link>
           </Stack>
-          <Divider
-            orientation="vertical"
-            sx={{
-              height: { md: "80px" },
-              backgroundColor: "#4d4d4d",
-              width: "1px",
-              alignSelf: "center",
-            }}
-          />
+
           {/*Quote*/}
           <Typography
             variant="h5"
             sx={{
               flexShrink: 0,
+              flexGrow: 1,
               alignSelf: "center",
               fontFamily: "Forum, serif",
-              fontSize: { md: "2rem" },
+              fontSize: { md: "2.5rem" },
               textAlign: "center",
+              pl: 2,
               my: 8,
             }}
           >
@@ -131,21 +140,38 @@ export default function Home() {
         </Stack>
 
         {/* Contacts */}
-        <Stack spacing={2} mt={3} sx={{ flexDirection: { md: "row" } }}>
-          <Stack sx={{ flexGrow: 1 }}>
+        <Stack spacing={2} mt={3} sx={{ flexDirection: { sm: "row" } }}>
+          <Stack sx={{ flexGrow: 1, width: { sm: "10%", md: "50%" } }}>
             <Typography
-              sx={{ fontFamily: "Forum, serif", fontSize: { xs: "3rem" } }}
+              sx={{
+                fontFamily: "Forum, serif",
+                fontSize: { xs: "3rem", md: "4rem" },
+              }}
             >
               Contact
             </Typography>
-            <Typography component="a" href="mailto:spscdnj1951@gmail.com" sx={{mt:{md:1}}}>
+            <Typography
+              component="a"
+              href="mailto:spscdnj1951@gmail.com"
+              sx={{ mt: { md: 1 }, fontSize: { xs: "1rem", md: "1.2rem" } }}
+            >
               <EmailIcon fontSize="small" /> spscdnj1951@gmail.com
             </Typography>
-            <Typography component="a" href="tel:0531-65460">
+            <Typography
+              component="a"
+              href="tel:0531-65460"
+              sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}
+            >
               <PhoneIcon fontSize="small" /> 0531-65460
             </Typography>
           </Stack>
-          <Stack sx={{ flexGrow: 2 }}>
+          <Stack
+            sx={{
+              flexGrow: 1,
+              width: { sm: "auto", md: "50%" },
+              pl: { md: 5 },
+            }}
+          >
             <MapCard />
           </Stack>
         </Stack>

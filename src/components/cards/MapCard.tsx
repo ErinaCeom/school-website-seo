@@ -4,10 +4,12 @@ import MyLocationIcon from "@mui/icons-material/MyLocation";
 import Link from "next/link";
 
 export default function MapCard() {
+
   return (
     <Card
       sx={{
         width: { xs: "auto", md: "auto" },
+        maxWidth: 500,
         height: { xs: 250, md: 250 },
         position: "relative",
         borderRadius: { xs: 4, md: 8 },
