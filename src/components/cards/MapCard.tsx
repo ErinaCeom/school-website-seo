@@ -38,24 +38,27 @@ export default function MapCard() {
           backdropFilter: "blur(0px)",
           zIndex: 1,
           px: 2,
-          py: 2,
+          py: 1,
           display: "flex",
           flexDirection: "rows",
         }}
       >
         <Stack direction="column" alignSelf="center" spacing={1}>
+          
           <Typography variant="caption" sx={{ opacity: 0.7 }}>
-            Our campus location
-          </Typography>
+          Our campus location
+          </Typography> 
+          
           <Typography
-            variant="subtitle1"
+            variant="body1"
             sx={{ fontWeight: 700, lineHeight: 1 }}
           >
-            Visit our campus for a tour
+            {/*Visit our campus for a tour*/}
+            Kasba, Dinajpur
           </Typography>
           <Stack direction="row" alignItems="center" spacing={1}>
             <MyLocationIcon fontSize="small" />
-            <Typography variant="subtitle2">Kasba, Dinajpur</Typography>
+            <Typography variant="subtitle2">25°36'43.2"N , 88°37'53.1"E</Typography>
           </Stack>
         </Stack>
         {/* Share Button */}
@@ -65,7 +68,7 @@ export default function MapCard() {
             justifyContent: "flex-end",
             flexGrow: 1,
             alignSelf: "center",
-            mt: 3,
+            mt:3
           }}
         >
           <IconButton

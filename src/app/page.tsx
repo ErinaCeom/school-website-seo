@@ -6,7 +6,7 @@ import {
   Link,
   Divider,
 } from "@mui/material";
-import { MapCard  } from "@/components";
+import { MapCard } from "@/components";
 
 export default function Home() {
   return (
@@ -72,46 +72,60 @@ export default function Home() {
       {/* Other sections */}
       <Container sx={{ my: 5 }}>
         {/* About Section */}
-        <Stack direction="column" sx={{ gap: 1, color: "white" }}>
-          <Typography
-            sx={{ fontFamily: "Forum, serif", fontSize: { xs: "3rem" } }}
-          >
-            About
-          </Typography>
-          <Typography
-            sx={{ fontFamily: "Forum, serif", fontSize: { xs: "1rem" } }}
-          >
-            St. Philip’s High School and College is a renowned educational
-            institution located in Dinajpur, Bangladesh. The school was founded
-            in 1951. The institution has a long-standing reputation for
-            providing quality education to students at both the high school and
-            college levels. St. Philip’s offers a wide range of academic
-            programs, extracurricular activities, and sports programs to enhance
-            the overall development of its students.
-          </Typography>
-          <Link
-            href="/about"
-            underline="always"
-            color="#ffff"
-            sx={{ fontStyle: "italic", fontSize: "small" }}
-          >
-            Read More &gt;
-          </Link>
-        </Stack>
-
-        {/*Quote*/}
-        <Typography
-          variant="h5"
-          sx={{
-            fontFamily: "Forum, serif",
-            fontSize: { md: "2rem" },
-            textAlign: "center",
-            my: 8,
-          }}
+        <Stack
+          sx={{ flexDirection: { xs: "column", md: "row" }, gap: { md: 8 } }}
         >
-          "discipline is not just a rule,
-          <br /> it's a culture of excellence"
-        </Typography>
+          <Stack direction="column" sx={{ gap: 1, color: "white" }}>
+            <Typography
+              sx={{ fontFamily: "Forum, serif", fontSize: { xs: "3rem" } }}
+            >
+              About
+            </Typography>
+            <Typography
+              sx={{ fontFamily: "Forum, serif", fontSize: { xs: "1rem" } }}
+            >
+              St. Philip’s High School and College is a renowned educational
+              institution located in Dinajpur, Bangladesh. The school was
+              founded in 1951. The institution has a long-standing reputation
+              for providing quality education to students at both the high
+              school and college levels. St. Philip’s offers a wide range of
+              academic programs, extracurricular activities, and sports programs
+              to enhance the overall development of its students.
+            </Typography>
+            <Link
+              href="/about"
+              underline="always"
+              color="#ffff"
+              sx={{ fontStyle: "italic", fontSize: "small" }}
+            >
+              Read More &gt;
+            </Link>
+          </Stack>
+          <Divider
+            orientation="vertical"
+            sx={{
+              height: { md: "80px" },
+              backgroundColor: "#4d4d4d",
+              width: "1px",
+              alignSelf: "center",
+            }}
+          />
+          {/*Quote*/}
+          <Typography
+            variant="h5"
+            sx={{
+              flexShrink: 0,
+              alignSelf: "center",
+              fontFamily: "Forum, serif",
+              fontSize: { md: "2rem" },
+              textAlign: "center",
+              my: 8,
+            }}
+          >
+            "discipline is not just a rule,
+            <br /> it's a culture of excellence"
+          </Typography>
+        </Stack>
 
         {/* Contacts */}
         <Stack mt={1}>
