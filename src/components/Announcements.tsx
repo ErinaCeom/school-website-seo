@@ -1,4 +1,7 @@
 import { Stack, Box, Grid, Typography, Link } from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+
+//TODO: fetch data from database, SEO optimization
 
 //dummy data
 const notices = [
@@ -53,14 +56,17 @@ export default function Announcements() {
       <Grid container>
         <Grid size={12}>
           <Typography
+            component="a"
+            href="/notices"
             sx={{
               fontFamily: "Forum, serif",
               fontSize: { xs: "3rem", md: "4rem" },
             }}
           >
             Notices
+            <ArrowForwardIosIcon />
           </Typography>
-          <Grid container spacing={1}>
+          <Grid container spacing={2}>
             {notices.map((text, index) => (
               <Grid size={6}>
                 <Stack spacing={0}>
