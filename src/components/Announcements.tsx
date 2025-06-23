@@ -70,7 +70,7 @@ export default function Announcements() {
           <Grid container spacing={2}>
             <Grid size={{ xs: 6 }}>
               <Stack spacing={0}>
-                {[notices.map((text,index) => (
+                {notices.map((text,index) => (
                   <Link
                     key={index}
                     href={text.title}
