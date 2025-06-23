@@ -66,7 +66,7 @@ export default function Announcements() {
             Notices
             <ArrowForwardIosIcon />
           </Typography>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} columnSpacing={{ xs: 4, md: 15, lg: 25 }}>
             {notices.map((text, index) => (
               <Grid size={6}>
                 <Stack spacing={0}>
