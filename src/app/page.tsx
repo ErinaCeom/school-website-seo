@@ -6,7 +6,7 @@ import {
   Link,
   Divider,
 } from "@mui/material";
-import { MapCard } from "@/components";
+import { Announcements, MapCard } from "@/components";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 
@@ -73,7 +73,7 @@ export default function Home() {
       </Box>
 
       {/* Other sections */}
-      <Container sx={{ my: 5 }}>
+      <Container maxWidth="xl" sx={{ my: 5 }}>
         {/* About and Quote Section */}
         <Stack
           sx={{ flexDirection: { xs: "column", md: "row" }, gap: { md: 0 } }}
@@ -91,7 +91,7 @@ export default function Home() {
             <Typography
               sx={{
                 fontFamily: "Forum, serif",
-                fontSize: { xs: "3rem", md: "4rem" },
+                fontSize: { xs: "3rem", sm: "4rem", md: "6rem" },
               }}
             >
               About
@@ -99,7 +99,7 @@ export default function Home() {
             <Typography
               sx={{
                 fontFamily: "Forum, serif",
-                fontSize: { xs: "1rem", md: "1.2rem" },
+                fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" },
               }}
             >
               St. Philip’s High School and College is a renowned educational
@@ -114,7 +114,10 @@ export default function Home() {
               href="/about"
               underline="always"
               color="#ffff"
-              sx={{ fontStyle: "italic", fontSize: { xs: "1rem", md: "1rem" } }}
+              sx={{
+                fontStyle: "italic",
+                fontSize: { xs: "1rem", md: "1.2rem" },
+              }}
             >
               Read More &gt;
             </Link>
@@ -128,7 +131,7 @@ export default function Home() {
               flexGrow: 1,
               alignSelf: "center",
               fontFamily: "Forum, serif",
-              fontSize: { md: "2.5rem" },
+              fontSize: { sm: "2.5rem", md: "3rem" },
               textAlign: "center",
               pl: 2,
               my: 8,
@@ -138,7 +141,8 @@ export default function Home() {
             <br /> it's a culture of excellence"
           </Typography>
         </Stack>
-
+        {/* Announcements */}
+        <Announcements />
         {/* Contacts */}
         <Stack spacing={2} mt={3} sx={{ flexDirection: { sm: "row" } }}>
           <Stack sx={{ flexGrow: 1, width: { sm: "10%", md: "50%" } }}>
