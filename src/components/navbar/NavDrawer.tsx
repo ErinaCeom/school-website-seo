@@ -89,6 +89,7 @@ interface NavDrawerProps {
   logoSrc?: string;
   titleName?: string;
   quickLinks?: string[];
+  homePage?: boolean;
 }
 
 // Centralized nav data object
@@ -160,6 +161,7 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
   logoSrc = "/logo.png",
   titleName = "SPSC",
   quickLinks = ["Events", "Alumni", "Admission", "Contact", "Address"],
+  homePage,
 }) => {
   const [open, setOpen] = React.useState(false); // Drawer open/close state
   const [expanded, setExpanded] = React.useState<string | false>(false); // Tracks currently expanded panel
@@ -188,7 +190,7 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
         elevation={0}
         position="fixed"
         sx={{
-          background: scrolledEnough ? "black" : "transparent",
+          background: `${homePage ? (scrolledEnough ? "black" : "transparent") : "linear-gradient(to bottom,rgba(0,0,0,1), rgba(0,0,0,0.1))"}`,
           p: { sm: 0, md: 1, lg: 1 },
           transition: "background 0.4s ease-in",
         }}
