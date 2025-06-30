@@ -55,9 +55,10 @@ export default function Announcements() {
     <Box gap={2} py={3}>
       <Grid container>
         <Grid size={12}>
+          {/*Will remove this */}
           <Typography
             component="a"
-            href="/notices"
+            href="/notice"
             sx={{
               fontFamily: "Forum, serif",
               fontSize: { xs: "3rem", md: "4rem" },
@@ -67,7 +68,7 @@ export default function Announcements() {
             <ArrowForwardIosIcon />
           </Typography>
           <Grid container spacing={2} columnSpacing={{ xs: 4, md: 15, lg: 25 }}>
-            {notices.map((text, index) => (
+            {notices.map((notice, index) => (
               <Grid size={6}>
                 <Stack spacing={0}>
                   <Typography
@@ -76,11 +77,15 @@ export default function Announcements() {
                       lineHeight: 0.8,
                     }}
                   >
-                    {text.date}
+                    {new Date(notice.date).toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
                   </Typography>
                   <Link
                     key={index}
-                    href={text.title}
+                    href={notice.title}
                     underline="always"
                     color="inherit"
                     sx={{
@@ -93,7 +98,7 @@ export default function Announcements() {
                       WebkitBoxOrient: "vertical",
                     }}
                   >
-                    {text.title}
+                    {notice.title}
                   </Link>
                 </Stack>
               </Grid>
