@@ -69,7 +69,7 @@ export default function Announcements() {
           </Typography>
           <Grid container spacing={2} columnSpacing={{ xs: 4, md: 15, lg: 25 }}>
             {notices.map((notice, index) => (
-              <Grid size={6}>
+              <Grid size={6} key={index}>
                 <Stack spacing={0}>
                   <Typography
                     color="grey"
