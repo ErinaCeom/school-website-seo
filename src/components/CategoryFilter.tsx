@@ -46,7 +46,7 @@ export default function CategoryFilter() {
             borderColor: "lightgray",
           },
           ".MuiSvgIcon-root": {
-            color: "white", // icon color
+            color: "white",
           },
           p: 0.2,
         }}
@@ -60,15 +60,18 @@ export default function CategoryFilter() {
               color: "white",
               "& .MuiMenuItem-root": {
                 "&.Mui-selected": {
-                  bgcolor: "#303030",
-                  color: "white",
+                  color: "dodgerblue",
                 },
                 "&.Mui-selected:hover": {
                   bgcolor: "#555",
                 },
-                "&.MuiMenuItem-divider":{
+                "&.MuiMenuItem-divider": {
                   borderColor: "white",
-                }
+                },
+                "&:hover": {
+                  bgcolor: "#303030",
+                  color: "white",
+                },
               },
             },
           },

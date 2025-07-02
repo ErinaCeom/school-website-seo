@@ -1,12 +1,10 @@
 import React from "react";
+import { Metadata } from "next";
 import {
   Container,
   Typography,
   Stack,
   Box,
-  Button,
-  Menu,
-  MenuItem,
   IconButton,
   Link,
   Divider,
@@ -14,18 +12,30 @@ import {
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CategoryFilter from "@/components/CategoryFilter";
+import SortFilter from "@/components/SortFilter";
+import LoadMoreNoticeBtn from "@/components/LoadMoreNoticeBtn";
 
 import { getNotice } from "@/utils";
+
+export const generateMetadata = (): Metadata => {
+  return {
+    title: "All Notice",
+    description: "Find all notices",
+  };
+};
 
 export default async function Notice({
   searchParams,
 }: {
-  searchParams: { category?: string };
+  searchParams: { category?: string; limit?: string; sort?: string };
 }) {
-  const category = searchParams.category;
-  const notices = await getNotice(category);
+  const category = await searchParams.category;
+  const sort = await searchParams.sort;
+  const limit = parseInt(searchParams.limit || "2"); // default limit is 6
+  const notices = await getNotice(category, sort);
+  const renderedNotices = notices.slice(0, limit);
+  const hasMore = notices.length > renderedNotices.length;
 
   return (
     <Container
@@ -39,11 +49,13 @@ export default async function Notice({
         Find all the announcements for all section and dates
       </Typography>
 
+      {/* Action buttons */}
       <Box sx={{ backgroundColor: "black", my: 2 }}>
         <Stack direction="row" gap={2}>
           <CategoryFilter />
+          <SortFilter/>
           {/* Icon Buttons */}
-          {[<FilterListIcon />, <SearchIcon />, <NotificationsNoneIcon />].map(
+          {[ <SearchIcon />, <NotificationsNoneIcon />].map(
             (icon, i) => (
               <IconButton
                 key={i}
@@ -60,8 +72,10 @@ export default async function Notice({
           )}
         </Stack>
       </Box>
+      
+      {/* Notice list */}
       <Stack spacing={3}>
-        {notices.map((notice, i) => {
+        {renderedNotices.map((notice, i) => {
           return (
             <Stack key={i}>
               <Stack
@@ -109,6 +123,7 @@ export default async function Notice({
           );
         })}
       </Stack>
+      {hasMore && <LoadMoreNoticeBtn />}
     </Container>
   );
 }
