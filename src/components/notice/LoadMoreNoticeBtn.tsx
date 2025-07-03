@@ -8,12 +8,12 @@ export default function LoadMoreButton() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const currentLimit = parseInt(searchParams.get("limit") || "2");
+  const currentLimit = parseInt(searchParams.get("limit") || "10");
   const category = searchParams.get("category") || "all";
 
   const handleClick = () => {
     const params = new URLSearchParams(searchParams);
-    params.set("limit", (currentLimit + 1).toString());
+    params.set("limit", (currentLimit + 10).toString());
     router.push(`?${params.toString()}`, { scroll: false });
   };
 

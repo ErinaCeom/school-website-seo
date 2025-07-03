@@ -1,0 +1,54 @@
+// components/ClientNoticeControls.tsx
+"use client";
+import React from "react";
+import { Stack, IconButton } from "@mui/material";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import { useSearchParams } from "next/navigation";
+
+import CategoryFilter from "./CategoryFilter";
+import SortFilterMenu from "./SortFilter";
+import SearchBar from "./SearchBar";
+
+import { motion, AnimatePresence } from "framer-motion";
+
+
+export default function ClientNoticeControls() {
+  const searchParams = useSearchParams();
+  const hasQuery = !!searchParams.get("q");
+
+  // this state fully drives hiding/showing
+  const [searchOpen, setSearchOpen] = React.useState(hasQuery);
+  React.useEffect(() => {
+    setSearchOpen(!!searchParams.get("q"));
+  }, [searchParams]);
+
+  return (
+    <>
+      <Stack direction="row" gap={2}>
+        <>
+          {!searchOpen && (
+            <>
+              <CategoryFilter />
+              <SortFilterMenu />
+            </>
+          )}
+          <SearchBar searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
+          {!searchOpen && (
+            <>
+              <IconButton
+                sx={{
+                  color: "white",
+                  border: "1px solid white",
+                  borderRadius: "12px",
+                  p: 1.2,
+                }}
+              >
+                <NotificationsNoneIcon />
+              </IconButton>
+            </>
+          )}
+        </>
+      </Stack>
+    </>
+  );
+}

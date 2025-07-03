@@ -9,12 +9,8 @@ import {
   Link,
   Divider,
 } from "@mui/material";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import SearchIcon from "@mui/icons-material/Search";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import CategoryFilter from "@/components/CategoryFilter";
-import SortFilter from "@/components/SortFilter";
-import LoadMoreNoticeBtn from "@/components/LoadMoreNoticeBtn";
+import { LoadMoreBtn } from "@/components/";
+import ActionButtons from "@/components/notice/ActionButtons";
 
 import { getNotice } from "@/utils";
 
@@ -30,9 +26,8 @@ export default async function Notice({
 }: {
   searchParams: { category?: string; limit?: string; sort?: string };
 }) {
-  const category = await searchParams.category;
-  const sort = await searchParams.sort;
-  const limit = parseInt(searchParams.limit || "2"); // default limit is 6
+  const { category, sort } = await searchParams;
+  const limit = parseInt((searchParams.limit) || "10"); // default limit is 10
   const notices = await getNotice(category, sort);
   const renderedNotices = notices.slice(0, limit);
   const hasMore = notices.length > renderedNotices.length;
@@ -41,7 +36,7 @@ export default async function Notice({
     <Container
       maxWidth="xl"
       sx={{ height: { xs: "max-content", md: "100vh" }, py: 10, border: 0 }}
-    >
+    >i
       <Typography sx={{ fontSize: "2rem", fontWeight: "bold" }}>
         All announcements
       </Typography>
@@ -51,28 +46,9 @@ export default async function Notice({
 
       {/* Action buttons */}
       <Box sx={{ backgroundColor: "black", my: 2 }}>
-        <Stack direction="row" gap={2}>
-          <CategoryFilter />
-          <SortFilter/>
-          {/* Icon Buttons */}
-          {[ <SearchIcon />, <NotificationsNoneIcon />].map(
-            (icon, i) => (
-              <IconButton
-                key={i}
-                sx={{
-                  color: "white",
-                  border: "1px solid white",
-                  borderRadius: "12px",
-                  p: 1.2,
-                }}
-              >
-                {icon}
-              </IconButton>
-            ),
-          )}
-        </Stack>
+        <ActionButtons />
       </Box>
-      
+
       {/* Notice list */}
       <Stack spacing={3}>
         {renderedNotices.map((notice, i) => {
@@ -123,7 +99,7 @@ export default async function Notice({
           );
         })}
       </Stack>
-      {hasMore && <LoadMoreNoticeBtn />}
+      {hasMore && <LoadMoreBtn />}
     </Container>
   );
 }
