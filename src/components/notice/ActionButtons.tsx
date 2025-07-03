@@ -9,9 +9,6 @@ import CategoryFilter from "./CategoryFilter";
 import SortFilterMenu from "./SortFilter";
 import SearchBar from "./SearchBar";
 
-import { motion, AnimatePresence } from "framer-motion";
-
-
 export default function ClientNoticeControls() {
   const searchParams = useSearchParams();
   const hasQuery = !!searchParams.get("q");

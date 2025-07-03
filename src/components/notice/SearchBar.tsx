@@ -36,10 +36,10 @@ export default function SearchBar({
   };
 
   const handleClear = () => {
-    setQuery("");
+   /* setQuery("");
     const params = new URLSearchParams(searchParams);
     params.delete("q");
-    router.replace(`?${params.toString()}`, { scroll: false });
+    router.replace(`?${params.toString()}`, { scroll: false });*/
     setSearchOpen(false);
   };
 
@@ -65,13 +65,13 @@ export default function SearchBar({
             <SearchIcon />
           </IconButton>
         )}
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="popLayout">
           {searchOpen && (
             <motion.div
               key="search-bar"
               initial={{ opacity: 0, width: 0 }}
               animate={{ opacity: 1, width: "100%" }}
-              exit={{ width: 0, opacity: 0 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               style={{ overflow: "hidden" }}
             >

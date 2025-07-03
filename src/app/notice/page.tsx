@@ -5,7 +5,6 @@ import {
   Typography,
   Stack,
   Box,
-  IconButton,
   Link,
   Divider,
 } from "@mui/material";
@@ -27,7 +26,7 @@ export default async function Notice({
   searchParams: { category?: string; limit?: string; sort?: string };
 }) {
   const { category, sort, limit } = await searchParams;
-  const limitNum = parseInt(limit || "10"); // default limit is 10
+  const limitNum = parseInt((limit) || "10"); // default limit is 10
   const notices = await getNotice(category, sort);
   const renderedNotices = notices.slice(0, limitNum);
   const hasMore = notices.length > renderedNotices.length;
@@ -36,7 +35,7 @@ export default async function Notice({
     <Container
       maxWidth="xl"
       sx={{ height: { xs: "max-content", md: "100vh" }, py: 10, border: 0 }}
-    >i
+    >
       <Typography sx={{ fontSize: "2rem", fontWeight: "bold" }}>
         All announcements
       </Typography>
