@@ -26,10 +26,10 @@ export default async function Notice({
 }: {
   searchParams: { category?: string; limit?: string; sort?: string };
 }) {
-  const { category, sort } = await searchParams;
-  const limit = parseInt((searchParams.limit) || "10"); // default limit is 10
+  const { category, sort, limit } = await searchParams;
+  const limitNum = parseInt(limit || "10"); // default limit is 10
   const notices = await getNotice(category, sort);
-  const renderedNotices = notices.slice(0, limit);
+  const renderedNotices = notices.slice(0, limitNum);
   const hasMore = notices.length > renderedNotices.length;
 
   return (
