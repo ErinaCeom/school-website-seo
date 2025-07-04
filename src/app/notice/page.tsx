@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "All Notices | St.Philip's High School and College",
     description: "Stay updated with the latest announcements and notices.",
-    url: "https://1725c8f9-17ed-4275-a6b6-f1d9ce3f0f9a-00-tawpiv14ujl3.sisko.replit.dev/notices",
+    url: "https://1725c8f9-17ed-4275-a6b6-f1d9ce3f0f9a-00-tawpiv14ujl3.sisko.replit.dev/notice",
     siteName: "St.Philip's High School and College",
     locale: "en_US",
     type: "website",

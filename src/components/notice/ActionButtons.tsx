@@ -38,7 +38,12 @@ export default function ClientNoticeControls() {
                   border: "1px solid white",
                   borderRadius: "12px",
                   p: 1.2,
+                  "&.Mui-disabled":{
+                    color: "gray",
+                    borderColor: "gray",
+                  }
                 }}
+                disabled
               >
                 <NotificationsNoneIcon />
               </IconButton>

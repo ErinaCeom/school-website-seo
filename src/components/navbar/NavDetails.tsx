@@ -11,7 +11,6 @@ import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { motion } from "framer-motion";
 
 const containerVariants = {
-  hidden: {},
   visible: {
     transition: {
       staggerChildren: 0.05,
