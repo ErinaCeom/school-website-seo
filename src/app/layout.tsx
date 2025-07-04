@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${josefin.variable} ${forum.variable}`}>
         <ThemeRegistry>
-          <NavDrawer titleName="SPSC" logoSrc="/logo.png" homePage />
+          <NavDrawer titleName="SPSC" logoSrc="/logo.png" />
           {children}
           <Footer />
         </ThemeRegistry>

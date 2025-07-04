@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   AppBar,
@@ -84,14 +85,6 @@ const NavAccordionSummary = styled(
   },
 }));
 
-// Props for NavDrawer component
-interface NavDrawerProps {
-  logoSrc?: string;
-  titleName?: string;
-  quickLinks?: string[];
-  homePage?: boolean;
-}
-
 // Centralized nav data object
 const navDetailsItems = {
   about: [
@@ -156,16 +149,23 @@ const fadeVariants = {
   exit: { opacity: 0, y: -10 },
 };
 
+// Props for NavDrawer component
+interface NavDrawerProps {
+  logoSrc?: string;
+  titleName?: string;
+  quickLinks?: string[];
+}
+
 // Main navigation drawer component
 const NavDrawer: React.FC<NavDrawerProps> = ({
   logoSrc = "/logo.png",
   titleName = "SPSC",
   quickLinks = ["Events", "Alumni", "Admission", "Contact", "Address"],
-  homePage,
 }) => {
   const [open, setOpen] = React.useState(false); // Drawer open/close state
   const [expanded, setExpanded] = React.useState<string | false>(false); // Tracks currently expanded panel
   const theme = useTheme();
+  const isHomePage = usePathname() === "/";
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const scrolledEnough = useScrollTrigger({
     disableHysteresis: true,
@@ -186,59 +186,68 @@ const NavDrawer: React.FC<NavDrawerProps> = ({
   return (
     <>
       {/* Top AppBar with Logo and Menu Icon */}
-      <AppBar
-        elevation={0}
-        position="fixed"
-        sx={{
-          background: `${homePage ? (scrolledEnough ? "black" : "transparent") : "linear-gradient(to bottom,rgba(0,0,0,1), rgba(0,0,0,0.1))"}`,
-          p: { sm: 0, md: 1, lg: 1 },
-          transition: "background 0.4s ease-in",
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.3,
+          ease: "easeInOut",
         }}
       >
-        <Toolbar>
-          <Stack
-            direction="row"
-            spacing={1}
-            alignItems="center"
-            flexGrow={1}
-            component="a"
-            href="/"
-          >
-            <Image
-              src={logoSrc}
-              alt="Logo"
-              width={60}
-              height={60}
-              style={{
-                width: isSmallScreen ? 40 : 60,
-                height: isSmallScreen ? 40 : 60,
-              }}
-            />
-            <Typography
-              sx={{
-                fontSize: {
-                  xs: "larger",
-                  sm: "larger",
-                  md: "2rem",
-                  lg: "2rem",
-                },
-                fontFamily: "Forum, serif",
-                fontWeight: 400,
-              }}
+        <AppBar
+          elevation={0}
+          position="fixed"
+          sx={{
+            background: `${isHomePage ? (scrolledEnough ? "black" : "transparent") : "linear-gradient(to bottom,rgba(0,0,0,1), rgba(0,0,0,0.1))"}`,
+            p: { sm: 0, md: 1, lg: 1 },
+            transition: "background 0.4s ease-in",
+          }}
+        >
+          <Toolbar>
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              flexGrow={1}
+              component="a"
+              href="/"
             >
-              {titleName}
-            </Typography>
-          </Stack>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={toggleDrawer(true)}
-          >
-            <MenuIcon fontSize={isSmallScreen ? "medium" : "large"} />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+              <Image
+                src={logoSrc}
+                alt="Logo"
+                width={60}
+                height={60}
+                style={{
+                  width: isSmallScreen ? 40 : 60,
+                  height: isSmallScreen ? 40 : 60,
+                }}
+              />
+              <Typography
+                sx={{
+                  fontSize: {
+                    xs: "larger",
+                    sm: "larger",
+                    md: "2rem",
+                    lg: "2rem",
+                  },
+                  fontFamily: "Forum, serif",
+                  fontWeight: 400,
+                }}
+              >
+                {titleName}
+              </Typography>
+            </Stack>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleDrawer(true)}
+            >
+              <MenuIcon fontSize={isSmallScreen ? "medium" : "large"} />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      </motion.div>
 
       {/* Fullscreen Navigation Drawer */}
       <Drawer
