@@ -1,0 +1,18 @@
+
+User-agent: *
+Allow: /
+
+# Allow crawling of main pages
+Allow: /notice
+Allow: /about
+
+# Disallow crawling of development and API routes
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Sitemap location
+Sitemap: https://1725c8f9-17ed-4275-a6b6-f1d9ce3f0f9a-00-tawpiv14ujl3.sisko.replit.dev/sitemap.xml
+
+# Crawl delay (optional - be respectful to search engines)
+Crawl-delay: 1
