@@ -23,8 +23,13 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
+interface NavDetailItem {
+  label: string;
+  href: string;
+}
+
 interface AnimatedNavListProps {
-  items: string[];
+  items: NavDetailItem[];
 }
 
 export default function NavDetails({ items }: AnimatedNavListProps) {
@@ -37,7 +42,7 @@ export default function NavDetails({ items }: AnimatedNavListProps) {
       disablePadding
       sx={{ mt: 2, }}
     >
-      {items.map((label, index) => (
+      {items.map((item, index) => (
         <ListItem
           key={index}
           component={motion.li}
@@ -47,7 +52,7 @@ export default function NavDetails({ items }: AnimatedNavListProps) {
           <ListItemButton
             disableRipple
             component="a"
-            href={`/${label.toLowerCase().replace(/\s+/g, "-")}`}
+            href={item.href}
             sx={{
               px: 1.5,
               py: 1,
@@ -59,7 +64,7 @@ export default function NavDetails({ items }: AnimatedNavListProps) {
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
               <ListItemText
-                primary={label}
+                primary={item.label}
                 primaryTypographyProps={{ fontSize: "inherit" }}
               />
               <ListItemIcon

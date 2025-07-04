@@ -85,25 +85,38 @@ const NavAccordionSummary = styled(
   },
 }));
 
-// Centralized nav data object
+// Centralized nav data object with custom href mappings
 const navDetailsItems = {
   about: [
-    "About SPSC",
-    "History of SPSC",
-    "Message from principal",
-    "Alumni",
-    "Charity section",
+    { label: "About SPSC", href: "/about" },
+    { label: "History of SPSC", href: "/about/history" },
+    { label: "Message from principal", href: "/about/principal-message" },
+    { label: "Alumni", href: "/alumni" },
+    { label: "Charity section", href: "/charity" },
   ],
-  sections: ["Pre-Primary", "Primary", "Highschool", "College", "Charity"],
-  staffs: ["Administration", "Academics", "Office Staff"],
+  sections: [
+    { label: "Pre-Primary", href: "/sections/pre-primary" },
+    { label: "Primary", href: "/sections/primary" },
+    { label: "Highschool", href: "/sections/highschool" },
+    { label: "College", href: "/sections/college" },
+    { label: "Charity", href: "/charity" },
+  ],
+  staffs: [
+    { label: "Administration", href: "/staff/administration" },
+    { label: "Academics", href: "/staff/academics" },
+    { label: "Office Staff", href: "/staff/office" },
+  ],
   facilities: [
-    "Language club",
-    "Debate club",
-    "Ecology club",
-    "Sports club",
-    "Scouts",
+    { label: "Language club", href: "/facilities/language-club" },
+    { label: "Debate club", href: "/facilities/debate-club" },
+    { label: "Ecology club", href: "/facilities/ecology-club" },
+    { label: "Sports club", href: "/facilities/sports-club" },
+    { label: "Scouts", href: "/facilities/scouts" },
   ],
-  notices: ["Recent notices", "All notices"],
+  notices: [
+    { label: "Recent notices", href: "/notice?sort=newest" },
+    { label: "All notices", href: "/notice" },
+  ],
 };
 
 // NavItem type for the navItems array
