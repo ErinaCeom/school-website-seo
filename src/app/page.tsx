@@ -44,7 +44,7 @@ export default function Home() {
               fontFamily: "Forum",
             }}
           >
-            St.Philip's High School & College
+            St.Philip&#39;s High School & College
           </Typography>
           <Typography
             variant="h4"
@@ -54,7 +54,7 @@ export default function Home() {
               fontFamily: "Forum",
             }}
           >
-            'Educating heart and mind'{" "}
+            &#39;Educating heart and mind&#39;{" "}
           </Typography>
         </Stack>
         <Divider
@@ -108,11 +108,11 @@ export default function Home() {
                   fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" },
                 }}
               >
-                St. Philip’s High School and College is a renowned educational
+                St. Philip&#39;s High School and College is a renowned educational
                 institution located in Dinajpur, Bangladesh. The school was
                 founded in 1951. The institution has a long-standing reputation
                 for providing quality education to students at both the high
-                school and college levels. St. Philip’s offers a wide range of
+                school and college levels. St. Philip&#39;s offers a wide range of
                 academic programs, extracurricular activities, and sports
                 programs to enhance the overall development of its students.
               </Typography>
@@ -143,8 +143,8 @@ export default function Home() {
                 my: 8,
               }}
             >
-              "discipline is not just a rule,
-              <br /> it's a culture of excellence"
+              &#34;discipline is not just a rule,
+              <br /> it&#39;s a culture of excellence&#34;
             </Typography>
           </Stack>
 

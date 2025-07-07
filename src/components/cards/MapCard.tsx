@@ -60,7 +60,7 @@ export default function MapCard() {
           </Typography>
           <Stack direction="row" alignItems="center" spacing={1}>
             <MyLocationIcon fontSize="small" />
-            <Typography variant="subtitle2">25°36'43.2"N , 88°37'53.1"E</Typography>
+            <Typography variant="subtitle2">25°36&#39;43.2&#34;N , 88°37&#39;53.1&#34;E</Typography>
           </Stack>
         </Stack>
         {/* Share Button */}

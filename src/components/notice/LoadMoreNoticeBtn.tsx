@@ -9,7 +9,7 @@ export default function LoadMoreButton() {
   const searchParams = useSearchParams();
 
   const currentLimit = parseInt(searchParams.get("limit") || "10");
-  const category = searchParams.get("category") || "all";
+//  const category = searchParams.get("category") || "all";
 
   const handleClick = () => {
     const params = new URLSearchParams(searchParams);
