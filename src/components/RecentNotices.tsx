@@ -1,5 +1,4 @@
 import { Stack, Box, Grid, Typography, Link } from "@mui/material";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 //TODO: fetch data from database, SEO optimization
 
@@ -50,23 +49,11 @@ const notices = [
   },
 ];
 
-export default function Announcements() {
+export default function RecentNotices() {
   return (
     <Box gap={2} py={3}>
       <Grid container>
         <Grid size={12}>
-          {/*Will remove this */}
-          <Typography
-            component="a"
-            href="/notice"
-            sx={{
-              fontFamily: "Forum, serif",
-              fontSize: { xs: "3rem", md: "4rem" },
-            }}
-          >
-            Notices
-            <ArrowForwardIosIcon />
-          </Typography>
           <Grid container spacing={2} columnSpacing={{ xs: 4, md: 15, lg: 25 }}>
             {notices.map((notice, index) => (
               <Grid size={6} key={index}>
@@ -96,6 +83,9 @@ export default function Announcements() {
                       display: "-webkit-box",
                       WebkitLineClamp: 2,
                       WebkitBoxOrient: "vertical",
+                      "&:active": {
+                        color: "grey",
+                      },
                     }}
                   >
                     {notice.title}

@@ -6,9 +6,10 @@ import {
   Link,
   Divider,
 } from "@mui/material";
-import { Announcements, MapCard } from "@/components";
+import { RecentNotices, MapCard } from "@/components";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 export default function Home() {
   return (
@@ -146,8 +147,23 @@ export default function Home() {
               <br /> it's a culture of excellence"
             </Typography>
           </Stack>
+
           {/* Announcements */}
-          <Announcements />
+          <Stack>
+            <Typography
+              component="a"
+              href="/notice"
+              sx={{
+                fontFamily: "Forum, serif",
+                fontSize: { xs: "3rem", md: "4rem" },
+              }}
+            >
+              Notices
+              <ArrowForwardIosIcon />
+            </Typography>
+            <RecentNotices />
+          </Stack>
+
           {/* Contacts */}
           <Stack spacing={2} sx={{ flexDirection: { sm: "row" } }}>
             <Stack sx={{ flexGrow: 1, width: { sm: "10%", md: "50%" } }}>
@@ -178,7 +194,7 @@ export default function Home() {
               sx={{
                 flexGrow: 1,
                 width: { sm: "auto", md: "50%" },
-                pl: { md: 5,lg:15 },
+                pl: { md: 5, lg: 15 },
               }}
             >
               <MapCard />
