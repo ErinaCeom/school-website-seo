@@ -1,5 +1,5 @@
 {
-  "name": "jazzy",
+  "name": "spsc-web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
+    "@supabase/supabase-js": "^2.50.3",
     "framer-motion": "^12.12.2",
     "next": "15.3.2",
     "react": "^19.0.0",
