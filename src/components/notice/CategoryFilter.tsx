@@ -11,7 +11,7 @@ export default function CategoryFilter() {
   const searchParams = useSearchParams();
   const current = searchParams.get("category") || "all";
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     const value = event.target.value;
     const params = new URLSearchParams(searchParams);
     if (value === "all") {
