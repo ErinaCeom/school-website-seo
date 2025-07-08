@@ -29,13 +29,23 @@ const getRecentNotices = cache(async () => {
 export default async function RecentNotices() {
   const notice = await getRecentNotices();
 
+  if (!notice || notice.length === 0) {
+    return (
+      <Box py={3}>
+        <Typography color="error" fontStyle="italic">
+          There was a problem loading notices :(
+        </Typography>
+      </Box>
+    );
+  }
+
   return (
     <Box gap={2} py={3}>
       <Grid container>
         <Grid size={12}>
           <Grid container spacing={2} columnSpacing={{ xs: 4, md: 15, lg: 25 }}>
             {notice?.map((notice, index) => (
-              <Grid size={6} key={index}>
+              <Grid size={6} key={notice.id}>
                 <Stack spacing={0}>
                   <Typography
                     color="grey"
@@ -51,7 +61,7 @@ export default async function RecentNotices() {
                   </Typography>
                   <Link
                     key={index}
-                    href={notice.title}
+                    href={`/notice/${notice.id}`}
                     underline="always"
                     color="inherit"
                     sx={{

@@ -39,20 +39,14 @@ const NavAccordion = styled((props: React.ComponentProps<typeof Accordion>) => (
 
 // Styled AccordionSummary with responsive typography and active-state styles
 // the items in the navbar
-const NavAccordionSummary = styled(
-  ({
-    isActive,
-    isAnyExpanded,
-    isSmallScreen,
-    ...props
-  }: {
-    isActive: boolean;
-    isAnyExpanded: boolean;
-    isSmallScreen: boolean;
-  } & React.ComponentProps<typeof AccordionSummary>) => (
-    <AccordionSummary {...props} />
-  ),
-)(({ isActive, isAnyExpanded, isSmallScreen }) => ({
+const NavAccordionSummary = styled(AccordionSummary, {
+  shouldForwardProp: (prop: string) =>
+    !["isActive", "isAnyExpanded", "isSmallScreen"].includes(prop),
+})<{
+  isActive: boolean;
+  isAnyExpanded: boolean;
+  isSmallScreen: boolean;
+}>(({ isActive, isAnyExpanded, isSmallScreen }) => ({
   paddingTop: 0,
   paddingBottom: 0,
   margin: 0,

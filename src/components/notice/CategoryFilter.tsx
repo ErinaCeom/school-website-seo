@@ -1,6 +1,6 @@
 // components/CategoryFilter.tsx
 "use client";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
@@ -11,13 +11,13 @@ export default function CategoryFilter() {
   const searchParams = useSearchParams();
   const current = searchParams.get("category") || "all";
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value;
     const params = new URLSearchParams(searchParams);
     if (value === "all") {
       params.delete("category");
     } else {
-      params.set("category", value);
+      params.set("category", String(value));
     }
     router.push(`?${params.toString()}`);
   };
