@@ -5,4 +5,5 @@ export { default as CategoryFilter } from "./notice/CategoryFilter";
 export { default as SortFilter } from "./notice/SortFilter";
 export { default as SearchBar } from "./notice/SearchBar";
 export { default as LoadMoreBtn } from "./notice/LoadMoreNoticeBtn";
+export * from "./notice/Pagination";
 export { default as Footer } from "./footer";

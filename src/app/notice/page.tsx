@@ -1,4 +1,4 @@
-// All notices page
+// app/notice/page.tsx
 import React from "react";
 import { Metadata } from "next";
 import {
@@ -9,10 +9,12 @@ import {
   Link,
   Divider,
 } from "@mui/material";
-import { LoadMoreBtn } from "@/components/";
+import { getNotices, getNoticeCount, formatDate } from "@/utils";
 import ActionButtons from "@/components/notice/ActionButtons";
+import PaginationWrapper from "@/components/notice/Pagination";
 
-import { getNotice } from "@/utils";
+export const revalidate = 3600; // cached for 1 hour
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "All Notices | SPSC",
@@ -33,13 +35,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "All Notices | St.Philip's High School and College",
     description: "Stay updated with the latest announcements and notices.",
-    url: "https://1725c8f9-17ed-4275-a6b6-f1d9ce3f0f9a-00-tawpiv14ujl3.sisko.replit.dev/notice",
+    url: "https://yoursite.com/notice", // Replace with your canonical URL
     siteName: "St.Philip's High School and College",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://1725c8f9-17ed-4275-a6b6-f1d9ce3f0f9a-00-tawpiv14ujl3.sisko.replit.dev/images/opengraph/Notice.png",
+        url: "https://yoursite.com/images/opengraph/Notice.png",
         width: 1200,
         height: 630,
         alt: "All Notices Banner",
@@ -48,22 +50,30 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Notice({
+export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string; limit?: string; sort?: string }>;
+  searchParams?: {
+    category?: string;
+    sort?: string;
+    page?: string;
+  };
 }) {
-  const { category, sort, limit } = await searchParams;
-  const limitNum = parseInt(limit || "10"); // default limit is 10
-  const notices = await getNotice(category, sort);
-  const renderedNotices = notices.slice(0, limitNum);
-  const hasMore = notices.length > renderedNotices.length;
+  const params = await searchParams;
+  const category = params?.category || "all";
+  const sort = params?.sort || "newest";
+  const page = parseInt(params?.page || "1", 10);
+
+  // fetch notices
+  const notices = await getNotices({ category, sort, page })
+  const count = await getNoticeCount();
+
+  const firstDate = notices?.[notices.length - 1]?.date;
+  const lastDate = notices?.[0]?.date;
+  const totalPages = Math.ceil((count || 0) / 10);
 
   return (
-    <Container
-      maxWidth="xl"
-      sx={{ height: { xs: "max-content", md: "100vh" }, py: 10, border: 0 }}
-    >
+    <Container maxWidth="xl" sx={{ py: 10 }}>
       <Typography sx={{ fontSize: "2rem", fontWeight: "bold" }}>
         All announcements
       </Typography>
@@ -71,62 +81,65 @@ export default async function Notice({
         Find all the announcements for all section and dates
       </Typography>
 
-      {/* Action buttons */}
       <Box sx={{ backgroundColor: "black", my: 2 }}>
         <ActionButtons />
       </Box>
 
-      {/* Notice list */}
+      {/* Notice List */}
       <Stack spacing={3}>
-        {renderedNotices.map((notice, i) => {
-          return (
-            <Stack key={i}>
-              <Stack
-                direction="row"
-                spacing={1}
-                sx={{ justifyContent: "flex-start", alignItems: "flex-start" }}
-              >
-                <Typography color="grey">
-                  {new Date(notice.date).toLocaleDateString("en-GB", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </Typography>
-                <Divider
-                  orientation="vertical"
-                  flexItem
-                  sx={{
-                    border: 3,
-                    borderRadius: 8,
-                    borderColor: "gray",
-                    height: "1px",
-                    alignSelf: "center",
-                  }}
-                />
-                <Typography color="grey">{notice.category}</Typography>
-              </Stack>
-              <Link
-                href="#"
-                underline="always"
-                color="inherit"
+        {notices.map((notice) => (
+          <Stack key={notice.id}>
+            <Stack
+              direction="row"
+              spacing={1}
+              sx={{ justifyContent: "flex-start", alignItems: "flex-start" }}
+            >
+              <Typography color="grey">{formatDate(notice.date)}</Typography>
+              <Divider
+                orientation="vertical"
+                flexItem
                 sx={{
-                  fontSize: { md: "1.2rem" },
-                  fontFamily: "Josefin Sans",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: "vertical",
+                  border: 3,
+                  borderRadius: 8,
+                  borderColor: "gray",
+                  height: "1px",
+                  alignSelf: "center",
                 }}
-              >
-                {notice.title}
-              </Link>
+              />
+              <Typography color="grey">{notice.category}</Typography>
             </Stack>
-          );
-        })}
+            <Link
+              href="#"
+              underline="always"
+              color="inherit"
+              sx={{
+                fontSize: { md: "1.2rem" },
+                fontFamily: "Josefin Sans",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+                "&:active": {
+                  color: "grey",
+                },
+              }}
+            >
+              {notice.title}
+            </Link>
+          </Stack>
+        ))}
       </Stack>
-      {hasMore && <LoadMoreBtn />}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <Stack mt={6} alignItems="center">
+          <Typography color="gray" fontSize="0.9rem" mb={2}>
+            {formatDate(firstDate)} – {formatDate(lastDate)}
+          </Typography>
+          <PaginationWrapper page={page} totalPages={totalPages} />
+        </Stack>
+      )}
     </Container>
   );
 }
