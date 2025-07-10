@@ -13,8 +13,8 @@ import { getNotices, getNoticeCount, formatDate } from "@/utils";
 import ActionButtons from "@/components/notice/ActionButtons";
 import PaginationWrapper from "@/components/notice/Pagination";
 
+export const dynamic = "auto";
 export const revalidate = 3600; // cached for 1 hour
-export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "All Notices | SPSC",
@@ -53,11 +53,11 @@ export const metadata: Metadata = {
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     category?: string;
     sort?: string;
     page?: string;
-  };
+  }>;
 }) {
   const params = await searchParams;
   const category = params?.category || "all";
@@ -65,7 +65,7 @@ export default async function Page({
   const page = parseInt(params?.page || "1", 10);
 
   // fetch notices
-  const notices = await getNotices({ category, sort, page })
+  const notices = await getNotices({ category, sort, page });
   const count = await getNoticeCount();
 
   const firstDate = notices?.[notices.length - 1]?.date;
@@ -109,7 +109,7 @@ export default async function Page({
               <Typography color="grey">{notice.category}</Typography>
             </Stack>
             <Link
-              href="#"
+              href={`/notice/${notice.id}`}
               underline="always"
               color="inherit"
               sx={{
@@ -121,6 +121,9 @@ export default async function Page({
                 WebkitLineClamp: 2,
                 WebkitBoxOrient: "vertical",
                 "&:active": {
+                  color: "grey",
+                },
+                ":hover": {
                   color: "grey",
                 },
               }}

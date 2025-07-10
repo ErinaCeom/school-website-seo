@@ -14,9 +14,9 @@ export default function PaginationWrapper({
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const handleChange = (_: any, value: number) => {
+  const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     const params = new URLSearchParams(searchParams);
-    
+
     params.set("page", String(value));
     router.push(`?${params.toString()}`);
   };
