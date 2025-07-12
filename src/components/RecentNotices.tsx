@@ -1,6 +1,6 @@
 import { Stack, Box, Grid, Typography, Link } from "@mui/material";
 import { supabase } from "@/lib/supabaseClient";
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 
 export const revalidate = 300; //cache for 5 minutes
 export const dynamic = "force-static";
@@ -11,20 +11,27 @@ interface Notice {
   date: string;
 }
 
-const getRecentNotices = cache(async () => {
-  const { data, error } = await supabase
-    .from("Notice")
-    .select("id,title,date")
-    .order("date", { ascending: false })
-    .limit(8);
+const getRecentNotices = unstable_cache(
+  async () => {
+    const { data, error } = await supabase
+      .from("Notice")
+      .select("id,title,date")
+      .order("date", { ascending: false })
+      .limit(8);
 
-  if (error) {
-    console.error(`\nError fething recent notices: ${error} \n`);
-    return null;
-  }
+    if (error) {
+      console.error(`\nError fething recent notices: ${error} \n`);
+      return null;
+    }
 
-  return data as Notice[];
-});
+    return data as Notice[];
+  },
+  [],
+  {
+    revalidate: 3600,
+    tags: ["notices"],
+  },
+);
 
 export default async function RecentNotices() {
   const notice = await getRecentNotices();
