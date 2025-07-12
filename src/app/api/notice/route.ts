@@ -32,6 +32,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(result, { status: 200 });
   } catch (err) {
+    console.error(`Error fetching cached notices: ${err}`)
     return NextResponse.json(
       { status: "error", error: "Internal server error" },
       { status: 500 },
