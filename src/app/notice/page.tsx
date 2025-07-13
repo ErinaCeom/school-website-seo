@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "All Notices | St.Philip's High School and College",
     description: "Stay updated with the latest announcements and notices.",
-    url: "https://yoursite.com/notice",
+    url: `${process.env.NEXT_PUBLIC_URL}/notice`,
     siteName: "St.Philip's High School and College",
     locale: "en_US",
     type: "website",

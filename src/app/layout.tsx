@@ -8,7 +8,7 @@ import Footer from "@/components/footer";
 export const metadata: Metadata = {
   title: "Home | SPSC",
   description:
-    "Welcome to YourSiteName – Stay updated with the latest notices, events, and announcements.",
+    "Welcome to SPSC – Beyond academics, SPSC nurtures well-rounded individuals. St. Philip's High School and College offers enriching co-curricular activities and character-building programs for holistic growth.",
   keywords: [
     "school notices",
     "school announcements",
@@ -23,12 +23,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Home | SPSC",
     description:
-      "Stay informed with real-time school notices, announcements, and events.",
-    url: "https://1725c8f9-17ed-4275-a6b6-f1d9ce3f0f9a-00-tawpiv14ujl3.sisko.replit.dev/",
+      "Official website of St.Philip's high School and College",
+    url: process.env.NEXT_PUBLIC_URL,
     siteName: "St.Philip's High school and College",
     images: [
       {
-        url: "https://1725c8f9-17ed-4275-a6b6-f1d9ce3f0f9a-00-tawpiv14ujl3.sisko.replit.dev/images/opengraph/home.png",
+        url: "/images/opengraph/home.png",
         width: 1200,
         height: 630,
         alt: "SPSC - Homepage",
@@ -36,14 +36,7 @@ export const metadata: Metadata = {
     ],
     locale: "en_US",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Home | SPSC",
-    description: "Stay updated with real-time notices and announcements.",
-    images: ["https://1725c8f9-17ed-4275-a6b6-f1d9ce3f0f9a-00-tawpiv14ujl3.sisko.replit.dev/images/opengraph/home.png"],
-    creator: "@yourTwitterHandle",
-  },
+  }
 };
 
 const forum = Forum({

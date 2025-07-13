@@ -4,12 +4,9 @@ import { Metadata } from "next";
 import { supabase } from "@/lib/supabaseClient";
 import { cache } from "react";
 
-export const revalidate = 300; // cached for 5 minutes
+export const revalidate = 3600; // cached for 1 hour
 export const dynamic = "force-static";
 
-// -------------------
-// Types
-// -------------------
 type Notice = {
   title: string;
   date: string;
@@ -22,9 +19,7 @@ type NoticeResult =
   | { status: "not_found" }
   | { status: "error"; message: string };
 
-// -------------------
-// Cached function
-// -------------------
+// Cached function to avoid multiple requests on Line 48 and 79
 const getNoticeDetails = cache(async (id: string): Promise<NoticeResult> => {
   const { data, error } = await supabase
     .from("Notice")
@@ -43,9 +38,6 @@ const getNoticeDetails = cache(async (id: string): Promise<NoticeResult> => {
   return { status: "success", data };
 });
 
-// -------------------
-// Dynamic Metadata
-// -------------------
 type PageProps = {
   params: Promise<{ id: string }>;
 };
@@ -65,13 +57,22 @@ export async function generateMetadata({
   const { data } = result;
 
   return {
-    title: "Notice: " + data.title,
+    title: data.title + " | SPSC - notice",
     description: data.desc.slice(0, 160),
     openGraph: {
       title: data.title,
       description: data.desc,
+      url: `${process.env.NEXT_PUBLIC_URL}/notice/${(await params).id}`,
+      siteName: "Saint Philip's high School and College",
       type: "article",
-      images: "/images/opengraph/notice.png",
+      images: [
+        {
+          url: "/images/opengraph/notice.png",
+          width: 1200,
+          height: 630,
+          alt: data.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
@@ -81,9 +82,6 @@ export async function generateMetadata({
   };
 }
 
-// -------------------
-// Page Component
-// -------------------
 export default async function Page({ params }: PageProps) {
   const { id } = await params;
   const result = await getNoticeDetails(id);
