@@ -1,5 +1,8 @@
 // app/notice/page.tsx
 
+// This page is for displaying all notices
+// It has a hybrid setup with SSR and CSR
+// SSR for page SEO and CSR for dynamic content
 import React from "react";
 import { Metadata } from "next";
 import { Container, Typography } from "@mui/material";
@@ -48,7 +51,7 @@ export default async function Page({
 }) {
   const params = await searchParams;
   const category = params?.category || "all";
-  // Only fetch count on server (for pagination)
+  // Only fetch count(cached) on server (for pagination)
   const count = await getNoticeCount(category);
   const totalPages = Math.ceil((count || 0) / 10);
 
@@ -62,7 +65,7 @@ export default async function Page({
         Find all the announcements for all sections and dates
       </Typography>
 
-      {/* Client-side components */}
+      {/* Client-side components (notice lists,action buttons) */}
       <NoticePageMain totalPages={totalPages} />
     </Container>
   );

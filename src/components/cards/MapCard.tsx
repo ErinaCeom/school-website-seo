@@ -1,10 +1,10 @@
+//MapCard.tsx
 import { Box, Stack, Card, Typography, IconButton } from "@mui/material";
 import DirectionsIcon from "@mui/icons-material/Directions";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import Link from "next/link";
 
 export default function MapCard() {
-
   return (
     <Card
       sx={{

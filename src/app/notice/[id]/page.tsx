@@ -1,10 +1,14 @@
 // app/notice/[id]/page.tsx
+
+// This page is for displaying a single notice
+// This is fully SSR and cached for a certain amount of time
 import { Box, Container, Stack, Typography, Link } from "@mui/material";
 import { Metadata } from "next";
 import { supabase } from "@/lib/supabaseClient";
 import { cache } from "react";
 
-export const revalidate = 3600; // cached for 1 hour
+// Next caches the entire page
+export const revalidate = 3600;
 export const dynamic = "force-static";
 
 type Notice = {
@@ -21,12 +25,13 @@ type NoticeResult =
 
 // Cached function to avoid multiple requests on Line 48 and 79
 const getNoticeDetails = cache(async (id: string): Promise<NoticeResult> => {
+  //Direct access to supabase
   const { data, error } = await supabase
     .from("Notice")
     .select("title, date, desc, fileUrl")
     .eq("id", parseInt(id))
     .maybeSingle();
-
+  
   if (error) {
     return { status: "error", message: error.message };
   }
@@ -42,11 +47,13 @@ type PageProps = {
   params: Promise<{ id: string }>;
 };
 
+//Dynamic metadata for each notice
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const result = await getNoticeDetails((await params).id);
 
+  // not necessary,still Returns not found metadata if anything goes wrong 
   if (result.status !== "success") {
     return {
       title: "Notice Not Found",
@@ -86,6 +93,7 @@ export default async function Page({ params }: PageProps) {
   const { id } = await params;
   const result = await getNoticeDetails(id);
 
+  // Error 
   if (result.status === "error") {
     return (
       <Container sx={{ pt: 10 }}>
@@ -96,6 +104,7 @@ export default async function Page({ params }: PageProps) {
     );
   }
 
+  // Not found
   if (result.status === "not_found") {
     return (
       <Container sx={{ pt: 10 }}>

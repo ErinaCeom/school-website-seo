@@ -1,8 +1,13 @@
-import { Stack, Box, Grid, Typography, Link } from "@mui/material";
-import { supabase } from "@/lib/supabaseClient";
-import { unstable_cache } from "next/cache";
+// RecentNotices.tsx
 
-export const revalidate = 300; //cache for 5 minutes
+// This component show the most recent 8 notices in a 4x4 grid
+
+import { Stack, Box, Grid, Typography, Link } from "@mui/material";
+import NextLink from "next/link";
+import { unstable_cache } from "next/cache";
+import { supabase } from "@/lib/supabaseClient";
+
+export const revalidate = 18000; //cache for 5 hours
 export const dynamic = "force-static";
 
 interface Notice {
@@ -11,6 +16,7 @@ interface Notice {
   date: string;
 }
 
+// Cached data on memory, revalidate with tags if necessary
 const getRecentNotices = unstable_cache(
   async () => {
     const { data, error } = await supabase
@@ -28,7 +34,7 @@ const getRecentNotices = unstable_cache(
   },
   [],
   {
-    revalidate: 3600,
+    revalidate: 18000, // revalidate after 5 hours
     tags: ["notices"],
   },
 );
@@ -36,6 +42,7 @@ const getRecentNotices = unstable_cache(
 export default async function RecentNotices() {
   const notice = await getRecentNotices();
 
+  // No notices means there was an error
   if (!notice || notice.length === 0) {
     return (
       <Box py={3}>
@@ -67,6 +74,7 @@ export default async function RecentNotices() {
                     })}
                   </Typography>
                   <Link
+                    component={NextLink}
                     key={index}
                     href={`/notice/${notice.id}`}
                     underline="always"

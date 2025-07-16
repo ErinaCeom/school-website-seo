@@ -43,7 +43,7 @@ export default function NoticePageMain({ totalPages }: { totalPages: number }) {
   const category = searchParams.get("category") || "all";
   const sort = searchParams.get("sort") || "newest";
 
-  // fetch notices
+  // fetch notices based on url queries, shows loading during fetch
   useEffect(() => {
     const fetchNotices = async () => {
       setLoading(true);
@@ -75,6 +75,7 @@ export default function NoticePageMain({ totalPages }: { totalPages: number }) {
     fetchNotices();
   }, [page, category, sort]);
 
+  // The newest and oldest notice dates of current page
   const firstDate =
     notices?.status === "success"
       ? String(notices.data[notices.data.length - 1]?.date)
@@ -88,7 +89,7 @@ export default function NoticePageMain({ totalPages }: { totalPages: number }) {
         <ActionButton />
       </Box>
 
-      {/* Loading state */}
+      {/* Loading state showing skeleton */}
       {loading && (
         <Stack spacing={3}>
           <AnimatePresence mode="wait">

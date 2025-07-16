@@ -1,4 +1,6 @@
 // components/ActionButton.tsx
+
+//this is a wrapper for all the acction buttons
 "use client";
 import React from "react";
 import { Stack, IconButton } from "@mui/material";
@@ -10,6 +12,7 @@ import SortFilterMenu from "./actionButtons/SortFilter";
 import SearchBar from "./actionButtons/SearchBar";
 
 export default function ActionButtons() {
+  //disabled search bar
   //const searchParams = useSearchParams();
   //const hasQuery = !!searchParams.get("q");
 

@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   }
 };
 
-//fonts imported from google fonts, also added as variables to use in css for both MUI and Next validation
+//fonts imported from google fonts, also added as variables to use in css for both MUI and Next validation, use your copilot for better explanation
 const forum = Forum({
   weight: "400",
   subsets: ["latin"],

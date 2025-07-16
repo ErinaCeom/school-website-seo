@@ -1,3 +1,4 @@
+//footer.tsx
 import { Stack, Box, Grid, Typography, Link } from "@mui/material";
 import Image from "next/image";
 
