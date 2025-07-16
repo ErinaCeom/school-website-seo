@@ -12,6 +12,7 @@
   --color-foreground: var(--foreground);
 }
 
+/*Dark mode changes based on user in-device preference*/
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #000000;

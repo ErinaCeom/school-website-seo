@@ -1,6 +1,6 @@
 import { Forum, Josefin_Sans } from "next/font/google";
 import type { Metadata } from "next";
-import ThemeRegistry from "../lib/themeRegistry";
+import ThemeRegistry from "@/lib/themeRegistry";
 import "./globals.css";
 import { NavDrawer } from "@/components/";
 import Footer from "@/components/footer";
@@ -39,6 +39,7 @@ export const metadata: Metadata = {
   }
 };
 
+//fonts imported from google fonts, also added as variables to use in css for both MUI and Next validation
 const forum = Forum({
   weight: "400",
   subsets: ["latin"],
@@ -52,6 +53,7 @@ const josefin = Josefin_Sans({
   variable: "--font-josefin",
 });
 
+/*Navbar and footer in layout */
 export default function RootLayout({
   children,
 }: Readonly<{
