@@ -204,6 +204,38 @@ export default function Home() {
               <MapCard />
             </Stack>
           </Stack>
+
+          {/* Dev's message*/}
+          <Stack>
+            <Typography
+              sx={{
+                fontFamily: "Forum, serif",
+                fontSize: { xs: "3rem", sm: "4rem", md: "6rem" },
+              }}
+            >
+              Dev&#39;s message
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Forum, serif",
+                fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" },
+                width: { md: "80%" },
+              }}
+            >
+              I made this website as a part of my SEO practice. The code is
+              publicly available on github. If you're a developer or a designer
+              wants to contribute,open an issue or pull request.
+            </Typography>
+            <Link
+              href="https://github.com/ErinaCeom/school-website-seo"
+              hrefLang="en"
+              target="_blank"
+              underline="always"
+              color="#fff"
+            >
+              Github repository
+            </Link>
+          </Stack>
         </Stack>
       </Container>
     </>

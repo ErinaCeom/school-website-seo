@@ -2,8 +2,7 @@ import { Forum, Josefin_Sans } from "next/font/google";
 import type { Metadata } from "next";
 import ThemeRegistry from "@/lib/themeRegistry";
 import "./globals.css";
-import { NavDrawer } from "@/components/";
-import Footer from "@/components/footer";
+import { NavDrawer, InfoSnackBar, Footer} from "@/components/";
 
 export const metadata: Metadata = {
   title: "Home | SPSC",
@@ -66,6 +65,7 @@ export default function RootLayout({
           <NavDrawer titleName="SPSC" logoSrc="/logo.png" />
           {children}
           <Footer />
+          <InfoSnackBar/>
         </ThemeRegistry>
       </body>
     </html>

@@ -6,3 +6,4 @@ export { default as SortFilter } from "./notice/actionButtons/SortFilter";
 export { default as SearchBar } from "./notice/actionButtons/SearchBar";
 export * from "./notice/actionButtons/Pagination";
 export { default as Footer } from "./footer";
+export { default as InfoSnackBar } from "./InfoSnackBar";

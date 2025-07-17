@@ -108,13 +108,12 @@ export default function Footer() {
       </Box>
 
       {/* Logo and property disclaim */}
-      <Box sx={{ alignSelf: "center", border: 1 }}>
+      <Box sx={{ alignSelf: "center" }}>
         <Stack
           direction="column"
           justifyContent="center"
           alignItems="center"
           textAlign="center"
-          border={1}
         >
           <Box
             sx={{
@@ -152,7 +151,7 @@ export default function Footer() {
             property displayed on this site belong to their respective owners.
             This website is a student project and is not an official publication
             or representation of SPSC. For official information, please visit
-            the school's official website.
+            the school&#39;s official website.
           </Typography>
         </Stack>
       </Box>
