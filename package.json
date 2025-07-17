@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "dev-build": "NEXT_DISABLE_ESLINT=true next build",
     "start": "next start",
     "lint": "next lint"
@@ -17,6 +18,7 @@
     "@supabase/supabase-js": "^2.50.3",
     "framer-motion": "^12.12.2",
     "next": "15.3.2",
+    "next-sitemap": "^4.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
