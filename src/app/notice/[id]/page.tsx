@@ -31,7 +31,7 @@ const getNoticeDetails = cache(async (id: string): Promise<NoticeResult> => {
     .select("title, date, desc, fileUrl")
     .eq("id", parseInt(id))
     .maybeSingle();
-  
+
   if (error) {
     return { status: "error", message: error.message };
   }
@@ -53,7 +53,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const result = await getNoticeDetails((await params).id);
 
-  // not necessary,still Returns not found metadata if anything goes wrong 
+  // not necessary,still Returns not found metadata if anything goes wrong
   if (result.status !== "success") {
     return {
       title: "Notice Not Found",
@@ -66,6 +66,26 @@ export async function generateMetadata({
   return {
     title: data.title + " | SPSC - notice",
     description: data.desc.slice(0, 160),
+    keywords: [
+      "school notices",
+      "school announcements",
+      "latest updates",
+      "events",
+      "student portal",
+      "spsc",
+      "spsc notice",
+      "spsc dinajpur",
+      "dinajpur",
+      "saint philip's high school and college",
+      "st. philip's High school and college ",
+      "saint philip's school",
+      "about SPSC",
+      "SPSC contact",
+      "dinajpur school list",
+    ],
+    robots: {
+      index: true,
+    },
     openGraph: {
       title: data.title,
       description: data.desc,
@@ -88,7 +108,7 @@ export default async function Page({ params }: PageProps) {
   const { id } = await params;
   const result = await getNoticeDetails(id);
 
-  // Error 
+  // Error
   if (result.status === "error") {
     return (
       <Container sx={{ pt: 10 }}>
@@ -113,7 +133,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <Container
       maxWidth="xl"
-      sx={{ height: { xs: "max-content", md: "100vh" }, py: 10, border: 0.5 }}
+      sx={{ height: { xs: "max-content", md: "100vh" }, py: 10 }}
     >
       <Stack direction={{ md: "row" }} spacing={5}>
         <Stack direction="column" width={{ md: "50%" }}>

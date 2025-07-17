@@ -223,8 +223,8 @@ export default function Home() {
               }}
             >
               I made this website as a part of my SEO practice. The code is
-              publicly available on github. If you're a developer or a designer
-              wants to contribute,open an issue or pull request.
+              publicly available on github. If you&#39;re a developer or a designer
+              wants to contribute, open an issue or pull request.
             </Typography>
             <Link
               href="https://github.com/ErinaCeom/school-website-seo"
