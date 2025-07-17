@@ -81,11 +81,6 @@ export async function generateMetadata({
         },
       ],
     },
-    twitter: {
-      card: "summary_large_image",
-      title: data.title,
-      description: data.desc,
-    },
   };
 }
 
