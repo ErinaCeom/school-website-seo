@@ -4,8 +4,10 @@
 // This is fully SSR and cached for a certain amount of time
 import { Box, Container, Stack, Typography, Link } from "@mui/material";
 import { Metadata } from "next";
+import Image from "next/image";
 import { supabase } from "@/lib/supabaseClient";
 import { cache } from "react";
+import { formatDate } from "@/utils";
 
 // Next caches the entire page
 export const revalidate = 3600;
@@ -16,6 +18,7 @@ type Notice = {
   date: string;
   desc: string;
   fileUrl: string | null;
+  fileType: "IMAGE" | "PDF" | null;
 };
 
 type NoticeResult =
@@ -28,7 +31,7 @@ const getNoticeDetails = cache(async (id: string): Promise<NoticeResult> => {
   //Direct access to supabase
   const { data, error } = await supabase
     .from("Notice")
-    .select("title, date, desc, fileUrl")
+    .select("title, date, desc, fileUrl, fileType")
     .eq("id", parseInt(id))
     .maybeSingle();
 
@@ -142,32 +145,31 @@ export default async function Page({ params }: PageProps) {
               {data.title}
             </Typography>
             <Typography sx={{ color: "grey", mb: 2 }} gutterBottom>
-              {new Date(data.date).toLocaleDateString("en-GB", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
+              {formatDate(data.date)}
             </Typography>
             <Typography sx={{ fontSize: "1.2rem" }}>{data.desc}</Typography>
-
-            {data.fileUrl ? (
-              <Link
-                href={data.fileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                See attached file
-              </Link>
-            ) : (
-              <Typography>*No files provided</Typography>
-            )}
           </Box>
           <Link href="/notice" color="#ffffff" pt={5}>
             &lt;Back to notices
           </Link>
         </Stack>
-        <Box sx={{ width: { md: "50%" } }}>
-          space for announcements list/image
+        <Box sx={{ width: { md: "50%" }, p: 1,mt:3}}>
+          {(data.fileType == "IMAGE" && (
+            <Image
+              src={data.fileUrl || "undefined"}
+              width={500}
+              height={500}
+              alt="Image of notice"
+            />
+          )) ||
+            (data.fileType == "PDF" && (
+              <Link
+                href={data.fileUrl || "undefined"}
+                target="_blank"
+              >
+                See attached file
+              </Link>
+            )) || <Typography>No attachment provided</Typography>}
         </Box>
       </Stack>
     </Container>
