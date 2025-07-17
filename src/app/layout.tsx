@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  other: {
+    "google-site-verification": process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+  },
   openGraph: {
     title: "Home | SPSC",
     description: "Official website of St.Philip's high School and College",
