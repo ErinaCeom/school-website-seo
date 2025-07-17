@@ -1,3 +1,4 @@
+//footer.tsx
 import { Stack, Box, Grid, Typography, Link } from "@mui/material";
 import Image from "next/image";
 
@@ -16,7 +17,8 @@ export default function Footer() {
       gap={2}
       py={3}
     >
-      <Box sx={{ width: { xs: "100%", md: "50%", xl: "50%" } }}>
+      {/* Link grids */}
+      <Box sx={{ width: { xs: "100%", md: "50%", xl: "50%" },flexShrink: 0, }}>
         <Stack direction="row" justifyContent="space-around">
           {/* Quick Links */}
           <Grid container>
@@ -104,7 +106,9 @@ export default function Footer() {
           </Grid>
         </Stack>
       </Box>
-      <Box sx={{ flexGrow: 1, alignSelf: "center" }}>
+
+      {/* Logo and property disclaim */}
+      <Box sx={{ alignSelf: "center" }}>
         <Stack
           direction="column"
           justifyContent="center"
@@ -142,12 +146,12 @@ export default function Footer() {
           >
             St. Philip&apos;s High School &amp; College
           </Typography>
-          <Typography
-            sx={{
-              color: "grey",
-            }}
-          >
-          Copyright © 2023 All rights reserved
+          <Typography variant="caption" color="grey" mx={2}>
+            SPSC and all associated marks, logos, images and intellectual
+            property displayed on this site belong to their respective owners.
+            This website is a student project and is not an official publication
+            or representation of SPSC. For official information, please visit
+            the school&#39;s official website.
           </Typography>
         </Stack>
       </Box>

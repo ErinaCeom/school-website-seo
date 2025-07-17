@@ -1,3 +1,4 @@
+// home page
 import {
   Box,
   Container,
@@ -73,9 +74,11 @@ export default function Home() {
         />
       </Box>
 
+      {/* End of Hero section */}
+
       {/* Other sections */}
       <Container maxWidth="xl" sx={{ my: 5 }}>
-        {/*For spacing netween sections */}
+        {/*Stack wrapper for spacing between sections */}
         <Stack direction="column" spacing={{ md: 15 }} mb={10}>
           {/* About and Quote Section */}
           <Stack
@@ -108,13 +111,14 @@ export default function Home() {
                   fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" },
                 }}
               >
-                St. Philip&#39;s High School and College is a renowned educational
-                institution located in Dinajpur, Bangladesh. The school was
-                founded in 1951. The institution has a long-standing reputation
-                for providing quality education to students at both the high
-                school and college levels. St. Philip&#39;s offers a wide range of
-                academic programs, extracurricular activities, and sports
-                programs to enhance the overall development of its students.
+                St. Philip&#39;s High School and College is a renowned
+                educational institution located in Dinajpur, Bangladesh. The
+                school was founded in 1951. The institution has a long-standing
+                reputation for providing quality education to students at both
+                the high school and college levels. St. Philip&#39;s offers a
+                wide range of academic programs, extracurricular activities, and
+                sports programs to enhance the overall development of its
+                students.
               </Typography>
               <Link
                 href="/about"
@@ -199,6 +203,38 @@ export default function Home() {
             >
               <MapCard />
             </Stack>
+          </Stack>
+
+          {/* Dev's message*/}
+          <Stack>
+            <Typography
+              sx={{
+                fontFamily: "Forum, serif",
+                fontSize: { xs: "3rem", sm: "4rem", md: "6rem" },
+              }}
+            >
+              Dev&#39;s message
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Forum, serif",
+                fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" },
+                width: { md: "80%" },
+              }}
+            >
+              I made this website as a part of my SEO practice. The code is
+              publicly available on github. If you&#39;re a developer or a designer
+              wants to contribute, open an issue or pull request.
+            </Typography>
+            <Link
+              href="https://github.com/ErinaCeom/school-website-seo"
+              hrefLang="en"
+              target="_blank"
+              underline="always"
+              color="#fff"
+            >
+              Github repository
+            </Link>
           </Stack>
         </Stack>
       </Container>
