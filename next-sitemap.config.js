@@ -2,6 +2,8 @@
 const config = {
   siteUrl: process.env.NEXT_PUBLIC_URL,
   generateRobotsTxt: true,
+  sitemapSize: 0,
+  outDir: './public',
   exclude: ["/admin", "/api", "/_next"],
   additionalPaths: async () => {
     const { createClient } = require("@supabase/supabase-js");
