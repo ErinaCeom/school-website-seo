@@ -1,53 +1,57 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
-<url>
-<loc>https://spscweb.vercel.app/</loc>
-<lastmod>2025-07-18T14:12:07+00:00</lastmod>
-<priority>1.00</priority>
-</url>
-<url>
-<loc>https://spscweb.vercel.app/notice</loc>
-<lastmod>2025-07-18T14:12:07+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://spscweb.vercel.app/notice/36</loc>
-<lastmod>2025-07-18T14:12:07+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://spscweb.vercel.app/notice/35</loc>
-<lastmod>2025-07-18T14:12:07+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://spscweb.vercel.app/notice/34</loc>
-<lastmod>2025-07-18T14:12:07+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://spscweb.vercel.app/notice/33</loc>
-<lastmod>2025-07-18T14:12:07+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://spscweb.vercel.app/notice/32</loc>
-<lastmod>2025-07-18T14:12:07+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://spscweb.vercel.app/notice/31</loc>
-<lastmod>2025-07-18T14:12:07+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://spscweb.vercel.app/notice/30</loc>
-<lastmod>2025-07-18T14:12:07+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://spscweb.vercel.app/notice/29</loc>
-<lastmod>2025-07-18T14:12:07+00:00</lastmod>
-<priority>0.80</priority>
-</url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
+  <url>
+    <loc>https://spscweb.vercel.app/</loc>
+    <lastmod>2025-07-18T14:12:07+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://spscweb.vercel.app/notice</loc>
+    <lastmod>2025-07-18T14:12:07+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spscweb.vercel.app/notice/36</loc>
+    <lastmod>2025-07-18T14:12:07+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spscweb.vercel.app/notice/35</loc>
+    <lastmod>2025-07-18T14:12:07+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spscweb.vercel.app/notice/34</loc>
+    <lastmod>2025-07-18T14:12:07+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spscweb.vercel.app/notice/33</loc>
+    <lastmod>2025-07-18T14:12:07+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spscweb.vercel.app/notice/32</loc>
+    <lastmod>2025-07-18T14:12:07+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spscweb.vercel.app/notice/31</loc>
+    <lastmod>2025-07-18T14:12:07+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spscweb.vercel.app/notice/30</loc>
+    <lastmod>2025-07-18T14:12:07+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://spscweb.vercel.app/notice/29</loc>
+    <lastmod>2025-07-18T14:12:07+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
 </urlset>
