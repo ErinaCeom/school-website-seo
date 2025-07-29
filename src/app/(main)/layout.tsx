@@ -1,7 +1,7 @@
 import { Forum, Josefin_Sans } from "next/font/google";
 import type { Metadata } from "next";
 import ThemeRegistry from "@/lib/themeRegistry";
-import "./globals.css";
+import "../globals.css";
 import { NavDrawer, InfoSnackBar, Footer } from "@/components/";
 
 export const metadata: Metadata = {
