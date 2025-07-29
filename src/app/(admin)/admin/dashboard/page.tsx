@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Container, Box, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 export default function Dashboard() {
   return (
