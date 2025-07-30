@@ -6,8 +6,6 @@ export async function updateSession(request: NextRequest) {
     request,
   });
 
-  console.log("request.cookies", request.cookies);
-
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -40,12 +38,10 @@ export async function updateSession(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log("[Middleware] User:", user);
 
   //not checking routes because middleware is only applied to /admin/*
   if (!user) {
     // no user, potentially respond by redirecting the user to the login page
-    console.log("[Middleware] No user found, should redirect to login");
     const url = request.nextUrl.clone();
     url.pathname = "/admin";
     return NextResponse.redirect(url);

@@ -100,6 +100,7 @@ export default function LoginForm() {
             bgcolor: "#33459c",
             "&.MuiButton-loadingIndicator": {
               color: "white",
+              borderColor: "white",
             },
           },
         }}
