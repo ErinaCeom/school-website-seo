@@ -8,10 +8,19 @@ export async function GET(request: NextRequest) {
   const category = searchParams.get("category") || "all";
   const sort = searchParams.get("sort") || "newest";
   const pageParam = searchParams.get("page");
+  const offsetParam = searchParams.get("offset");
+
+  const offset = offsetParam ? Number(offsetParam) : undefined;
   const page = pageParam ? Number(pageParam) : 1;
 
-  // Validating page parameter
-  if (isNaN(page) || page < 1) {
+  if (offsetParam && (isNaN(offset!) || offset! < 0)) {
+    return NextResponse.json(
+      { status: "error", error: "Invalid offset" },
+      { status: 400 },
+    );
+  }
+
+  if (!offsetParam && (isNaN(page) || page < 1)) {
     return NextResponse.json(
       { status: "error", error: "Invalid page number" },
       { status: 400 },
@@ -20,7 +29,11 @@ export async function GET(request: NextRequest) {
 
   try {
     // Using existing cached function
-    const result = await getNotices({ category, sort, page });
+    const result = await getNotices({
+      category,
+      sort,
+      ...(offsetParam ? { offset } : { page }),
+    });
 
     // Mapping utility function's return types to HTTP responses
     if (result.status === "error") {
@@ -32,7 +45,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(result, { status: 200 });
   } catch (err) {
-    console.error(`Error fetching cached notices: ${err}`)
+    console.error(`Error fetching cached notices: ${err}`);
     return NextResponse.json(
       { status: "error", error: "Internal server error" },
       { status: 500 },
