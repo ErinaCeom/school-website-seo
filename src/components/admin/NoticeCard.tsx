@@ -9,25 +9,6 @@ import {
   CardActionArea,
 } from "@mui/material";
 
-const noticeVariants = {
-  hidden: { opacity: 0 },
-  visible: (i: number) => ({
-    opacity: 1,
-    transition: {
-      delay: i * 0.1,
-      duration: 0.5,
-      ease: "easeOut" as const,
-    },
-  }),
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 2.3,
-      ease: "easeOut" as const,
-    },
-  },
-};
-
 type NoticeType = {
   id: string;
   date: string;
