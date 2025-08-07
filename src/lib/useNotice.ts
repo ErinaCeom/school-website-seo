@@ -17,6 +17,8 @@ const useNotices = (initialOffset: number, limit: number) => {
   const [offset, setOffset] = useState(initialOffset);
   const [hasMore, setHasMore] = useState(true);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const initialOffsetRef = useRef(initialOffset);
+  const limitRef = useRef(limit);
 
   const fetchNotices = useCallback(
     async (isInitial = false) => {
@@ -44,8 +46,12 @@ const useNotices = (initialOffset: number, limit: number) => {
           setNotices((prev) =>
             isInitial ? result.data : [...prev, ...result.data],
           );
-          setOffset(isInitial ? initialOffset + limit : (prev) => prev + limit);
-          setHasMore(result.data.length >= limit);
+          setOffset((prev) =>
+            isInitial
+              ? initialOffsetRef.current + limitRef.current
+              : prev + limitRef.current,
+          );
+          setHasMore(result.data.length >= limitRef.current);
         } else if (result.status === "empty") {
           setHasMore(false);
         } else {
@@ -60,7 +66,7 @@ const useNotices = (initialOffset: number, limit: number) => {
         abortControllerRef.current = null;
       }
     },
-    [loading, hasMore, offset, initialOffset, limit],
+    [loading, hasMore, offset,initialOffset],
   );
 
   const fetchMoreNotices = useCallback(() => {
@@ -100,7 +106,9 @@ const useNotices = (initialOffset: number, limit: number) => {
   useEffect(() => {
     fetchNotices(true);
     return () => abortControllerRef.current?.abort();
-  }, [fetchNotices]);
+    //Dependency will trigger infinite loop, Leave empty.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     notices,

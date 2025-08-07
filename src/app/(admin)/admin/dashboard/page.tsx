@@ -168,7 +168,7 @@ const NoticeList = React.memo(
       hasMore={hasMore}
       loader={loading && <Loader />}
       endMessage={<EndMessage noticeCount={notices.length} />}
-      scrollThreshold="100px"
+      scrollThreshold="0.9"
       style={{ overflow: "visible" }}
     >
       <AnimatePresence>
