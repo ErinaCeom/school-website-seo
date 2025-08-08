@@ -172,13 +172,19 @@ export default function CreateNoticePage() {
                       sx: { color: "#fff" },
                     },
                     sx: {
-                      "& .MuiTextField-root": {
-                        color: "red",
-                        p:5,
-                        "& .MuiOutlinedInput":{
-                          color:"red",
-                          p:5,
-                        }
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: "gray",
+                        },
+                        "&:hover fieldset": {
+                          borderColor: "lightgray",
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "white",
+                        },
+                      },
+                      "& .MuiInputBase-input": {
+                        color: "white",
                       },
                     },
                   },
