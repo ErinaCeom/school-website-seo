@@ -13,8 +13,13 @@ type NoticeFetchResult =
   | { status: "error"; error: string };
 
 // Internal function for fetching (not cached directly)
-async function _getNotices(category: string, sort: string, page: number) {
-  const from = (page - 1) * PAGE_SIZE;
+async function _getNotices(
+  category: string,
+  sort: string,
+  page?: number,
+  offset?: number,
+) {
+  const from = offset ?? (page! - 1) * PAGE_SIZE;
   const to = from + PAGE_SIZE - 1;
 
   let query = supabase
@@ -42,11 +47,12 @@ async function _getNotices(category: string, sort: string, page: number) {
 
 const cacheNotices = unstable_cache(
   _getNotices,
-  (category: string, sort: string, page: number) => [
+  (category: string, sort: string, page?: number, offset?: number) => [
     "notices",
     category,
     sort,
     String(page),
+    offset !== undefined ? `offset:${offset}` : `page:${page ?? 1}`,
   ],
   {
     revalidate: 3600,
@@ -58,14 +64,16 @@ type NoticeParams = {
   category?: string;
   sort?: string;
   page?: number;
+  offset?: number;
 };
 
 export default function getNotices({
   category = "all",
   sort = "newest",
   page = 1,
+  offset,
 }: NoticeParams) {
-  return cacheNotices(category, sort, page);
+  return cacheNotices(category, sort, page, offset);
 }
 
 // Internal count fetch
