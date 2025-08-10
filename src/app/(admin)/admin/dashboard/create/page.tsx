@@ -7,6 +7,7 @@ import {
   Typography,
   MenuItem,
   Stack,
+  IconButton,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -15,10 +16,16 @@ import dayjs from "dayjs";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Editor from "@/components/admin/editor";
+
+import { supabaseBrowser } from "@/lib/supabaseBrowserClient";
+
+//components
 import DialogueBox from "@/components/admin/DialogueBox";
+
+//icons
+import CloseIcon from "@mui/icons-material/Close";
 
 // Form style
 const formStyle = {
@@ -60,10 +67,10 @@ type FormValues = z.infer<typeof schema>;
 
 // Page Component
 export default function CreateNoticePage() {
+  const [formData, setFormData] = useState<FormValues | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [confirmProgress, setConfirmProgress] = useState(false);
-  const searchParams = useSearchParams();
-  const isEditMode = !!searchParams.get("edit");
+  const router = useRouter();
 
   const {
     register,
@@ -84,14 +91,59 @@ export default function CreateNoticePage() {
   });
 
   const onSubmit = (data: FormValues) => {
-    // Pass form data to DialogBox via props or context
+    setFormData(data);
     setDialogOpen(true);
   };
 
   const handleConfirmPublish = async () => {
     setConfirmProgress(true);
-    alert("publishing");
-    setConfirmProgress(false);
+
+    try {
+      const file = formData?.attachment;
+      let attachmentUrl: string | null = null;
+
+      if (file && file != null) {
+        const fileName = `${file.type.startsWith("image/") ? "images/" : "pdfs/"}${file.name}`;
+
+        const { error: uploadError } = await supabaseBrowser.storage
+          .from("attachments")
+          .upload(fileName, file, { upsert: true });
+
+        if (uploadError) throw uploadError;
+
+        const { data } = supabaseBrowser.storage
+          .from("attachments")
+          .getPublicUrl(fileName);
+
+        attachmentUrl = data.publicUrl;
+      }
+
+      // Inserting the notice,this will be moved to api later
+      const { data: insertedData, error: insertError } = await supabaseBrowser
+        .from("Notice")
+        .insert({
+          title: formData?.title,
+          desc: formData?.body,
+          date: formData?.date,
+          category: formData?.category,
+          fileUrl: attachmentUrl,
+          fileType:
+            (file && (file.type.startsWith("image/") ? "IMAGE" : "PDF")) ||
+            null,
+        })
+        .select("id")
+        .single();
+
+      if (insertError) throw insertError;
+
+      const insertedId = insertedData.id;
+      fetch("/api/reload-cache", { method: "GET", credentials: "include" });
+      router.push(`/notice/${insertedId}`);
+    } catch {
+      alert("Something went wrong");
+    } finally {
+      setConfirmProgress(false);
+    }
   };
 
   return (
@@ -102,7 +154,6 @@ export default function CreateNoticePage() {
         p: 2,
         maxWidth: 500,
         mx: "auto",
-        mt: 1,
         color: "white",
       }}
     >
@@ -119,7 +170,6 @@ export default function CreateNoticePage() {
         margin="normal"
         {...register("title")}
         error={!!errors.title}
-        helperText={errors.title?.message}
         slotProps={{ inputLabel: { shrink: true } }}
         sx={{ ...formStyle }}
       />
@@ -132,7 +182,6 @@ export default function CreateNoticePage() {
           select
           {...register("category")}
           error={!!errors.category}
-          helperText={errors.category?.message}
           sx={{ ...formStyle }}
           slotProps={{
             select: {
@@ -148,8 +197,9 @@ export default function CreateNoticePage() {
         >
           <MenuItem value="All">All</MenuItem>
           <MenuItem value="Highschool">Highschool</MenuItem>
-          <MenuItem value="Primary">Primary</MenuItem>
-          <MenuItem value="Pre-primary">Pre-Primary</MenuItem>
+          <MenuItem value="primary">Primary</MenuItem>
+          <MenuItem value="pre-primary">Pre-Primary</MenuItem>
+          <MenuItem value="college">College</MenuItem>
         </TextField>
 
         <Controller
@@ -159,31 +209,22 @@ export default function CreateNoticePage() {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 {...field}
+                label="Date"
                 value={dayjs(field.value)}
                 onChange={(date) => field.onChange(date?.toDate())}
+                enableAccessibleFieldDOMStructure={false}
+                slots={{
+                  textField: TextField,
+                }}
                 slotProps={{
                   textField: {
-                    label: "Date",
-                    fullWidth: true,
-                    error: !!errors.date,
-                    helperText: errors.date?.message,
-                    variant: "outlined",
-                    InputLabelProps: {
-                      sx: { color: "#fff" },
-                    },
                     sx: {
                       "& .MuiOutlinedInput-root": {
                         "& fieldset": {
                           borderColor: "gray",
                         },
-                        "&:hover fieldset": {
-                          borderColor: "lightgray",
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "white",
-                        },
                       },
-                      "& .MuiInputBase-input": {
+                      "& .MuiInputLabel-root": {
                         color: "white",
                       },
                     },
@@ -192,6 +233,23 @@ export default function CreateNoticePage() {
                     sx: {
                       bgcolor: "#1b1d21",
                       color: "#fff",
+                      ".MuiPickersToolbar-root": {
+                        color: "#fff",
+                      },
+                      ".MuiDayCalendar-weekDayLabel": {
+                        color: "#fff",
+                      },
+                      "& .MuiPickersCalendarHeader-switchViewButton": {
+                        color: "#fff",
+                      },
+                    },
+                  },
+                  openPickerButton: {
+                    sx: {
+                      color: "#fff",
+                      border: 0,
+                      p: 0,
+                      pr: 1,
                     },
                   },
                 }}
@@ -201,43 +259,91 @@ export default function CreateNoticePage() {
         />
       </Stack>
 
-      {/* Body (Lexical Editor) */}
+      {/* Body  */}
       <Box mt={2}>
         <Typography variant="subtitle1">Body</Typography>
-        <Editor
-          onChange={(content) => setValue("body", content)}
-          initialContent={watch("body")}
+
+        <Controller
+          name="body"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              multiline
+              minRows={6}
+              maxRows={10}
+              fullWidth
+              variant="outlined"
+              placeholder="Enter the notice body here..."
+              error={!!errors.body}
+              helperText={errors.body?.message}
+              sx={{
+                ...formStyle,
+                textarea: {
+                  color: "white",
+                  fontSize: 10,
+                  minHeight: "40px",
+                  maxHeight: "220px",
+                },
+              }}
+            />
+          )}
         />
-        {errors.body && (
-          <Typography color="error" variant="caption">
-            {errors.body.message}
-          </Typography>
-        )}
       </Box>
 
       {/* Attachment */}
-      <Box mt={2}>
-        <Button variant="outlined" component="label" fullWidth>
-          Add attachment
-          <input
-            type="file"
-            hidden
-            accept="image/*,application/pdf"
-            onChange={(e) =>
-              setValue("attachment", e.target.files?.[0] || null)
-            }
-          />
-        </Button>
+      <Box mt={1}>
+        {!watch("attachment") && (
+          <Button variant="outlined" component="label" fullWidth>
+            Add attachment
+            <input
+              type="file"
+              hidden
+              accept="image/*,application/pdf"
+              onChange={(e) =>
+                setValue("attachment", e.target.files?.[0] || null, {
+                  shouldValidate: true,
+                })
+              }
+            />
+          </Button>
+        )}
+        {watch("attachment") && (
+          <Box
+            display="flex"
+            alignItems="center"
+            gap={1}
+            sx={{
+              p: 0.5,
+              border: 1,
+              borderColor: "gray",
+              borderRadius: 1,
+            }}
+          >
+            <Typography variant="body2" noWrap>
+              {watch("attachment")?.name} (
+              {(watch("attachment")!.size / 1024).toFixed(1)} KB)
+            </Typography>
+            <IconButton
+              size="small"
+              onClick={() => setValue("attachment", null)}
+              color="error"
+              sx={{ ml: "auto" }}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </Box>
+        )}
         {errors.attachment && (
           <Typography color="error" variant="caption">
-            {errors.attachment.message}
+            errors.attachment.message
           </Typography>
         )}
       </Box>
 
-      {/* Buttons */}
-      <Stack direction="row" spacing={2} mt={3}>
-        <Button fullWidth type="submit" variant="outlined">
+      {/* Publish Button */}
+      <Stack direction="row" spacing={0} mt={1}>
+        <Button fullWidth type="submit" variant="contained">
           Publish
         </Button>
       </Stack>
@@ -245,12 +351,12 @@ export default function CreateNoticePage() {
       {/* DialogBox for final post */}
       <DialogueBox
         open={dialogOpen}
-        title={isEditMode ? "Update Notice?" : "Publish Notice?"}
+        title="Publish Notice?"
         content="Are you sure you want to publish this notice? You can’t undo this."
         confirmText="Confirm"
         cancelText="Cancel"
         confirmColor="primary"
-        confirmDisabled={false} // we already validated before opening
+        confirmDisabled={false}
         confirmProgress={confirmProgress}
         onClose={() => setDialogOpen(false)}
         onConfirm={handleConfirmPublish}
